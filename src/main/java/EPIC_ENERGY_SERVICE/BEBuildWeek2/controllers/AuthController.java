@@ -1,6 +1,9 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.controllers;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.BadRequestException;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.UtenteLoginDTO;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.UtenteLoginSuccessDTO;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -30,7 +33,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public UserLoginSuccessDTO login(@RequestBody UserLoginDTO body){
-        return new UserLoginSuccessDTO(authService.authenticateUser(body));
+    public UtenteLoginSuccessDTO login(@RequestBody UtenteLoginDTO body){
+        return new UtenteLoginSuccessDTO(authService.authenticateUser(body));
     }
 }
