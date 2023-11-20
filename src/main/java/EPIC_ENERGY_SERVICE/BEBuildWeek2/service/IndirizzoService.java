@@ -2,10 +2,10 @@ package EPIC_ENERGY_SERVICE.BEBuildWeek2.service;
 
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Indirizzo;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.NotFoundException;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.NuovoIndirizzoDTO;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.repositories.IndirizzoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,12 +32,12 @@ public class IndirizzoService {
         return indirizzoRepository.findAll(pageable);
     }
 
-    public Indirizzo findById(int id) throws ChangeSetPersister.NotFoundException {
-        return indirizzoRepository.findById(id).orElseThrow(() -> new ChangeSetPersister.NotFoundException());
+    public Indirizzo findById(int id) {
+        return indirizzoRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
-    public void findByIdAndDelete(int id) throws ChangeSetPersister.NotFoundException {
-        Indirizzo found = this.findById(id);
+    public void findByIdAndDelete(int id) {
+        Indirizzo found = indirizzoRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         indirizzoRepository.delete(found);
     }
 }

@@ -1,10 +1,10 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.service;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Provincia;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.NotFoundException;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.NuovaProvinciaDTO;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.repositories.ProvinciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,12 +29,12 @@ public class ProvinciaService {
         return provinciaRepository.findAll(pageable);
     }
 
-    public Provincia findById(int id) throws ChangeSetPersister.NotFoundException {
-        return provinciaRepository.findById(id).orElseThrow(() -> new ChangeSetPersister.NotFoundException());
+    public Provincia findById(int id) {
+        return provinciaRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
-    public void findByIdAndDelete(int id) throws ChangeSetPersister.NotFoundException {
-        Provincia found = this.findById(id);
+    public void findByIdAndDelete(int id) {
+        Provincia found = provinciaRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         provinciaRepository.delete(found);
     }
 }

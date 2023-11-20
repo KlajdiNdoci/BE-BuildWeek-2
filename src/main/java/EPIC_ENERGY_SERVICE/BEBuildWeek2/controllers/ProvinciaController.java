@@ -4,7 +4,6 @@ import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Provincia;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.NuovaProvinciaDTO;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.service.ProvinciaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,13 +22,13 @@ public class ProvinciaController {
     }
 
     @GetMapping(value = "/{id}")
-    public Provincia findById(@PathVariable int id) throws ChangeSetPersister.NotFoundException {
+    public Provincia findById(@PathVariable int id) {
         return provinciaService.findById(id);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void findByIdAndDelete(@PathVariable int id) throws ChangeSetPersister.NotFoundException {
+    public void findByIdAndDelete(@PathVariable int id) {
         provinciaService.findByIdAndDelete(id);
     }
 

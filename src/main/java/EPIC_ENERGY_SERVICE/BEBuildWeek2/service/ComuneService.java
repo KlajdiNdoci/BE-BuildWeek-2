@@ -1,10 +1,10 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.service;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Comune;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.NotFoundException;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.NuovoComuneDTO;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.repositories.ComuneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,14 +29,14 @@ public class ComuneService {
         return comuneRepository.findAll(pageable);
     }
 
-    public Comune findById(int id) throws ChangeSetPersister.NotFoundException {
-        return comuneRepository.findById(id).orElseThrow(() -> new ChangeSetPersister.NotFoundException());
+    public Comune findById(int id) {
+        return comuneRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 
-    public void findByIdAndDelete(int id) throws ChangeSetPersister.NotFoundException {
-        Comune found = this.findById(id);
+    public void findByIdAndDelete(int id) {
+        Comune found = comuneRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         comuneRepository.delete(found);
     }
-    
+
 
 }

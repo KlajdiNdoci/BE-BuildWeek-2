@@ -4,7 +4,6 @@ import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Indirizzo;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.NuovoIndirizzoDTO;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.service.IndirizzoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -23,13 +22,13 @@ public class IndirizzoController {
     }
 
     @GetMapping(value = "/{id}")
-    public Indirizzo findById(@PathVariable int id) throws ChangeSetPersister.NotFoundException {
+    public Indirizzo findById(@PathVariable int id) {
         return indirizzoService.findById(id);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void findByIdAndDelete(@PathVariable int id) throws ChangeSetPersister.NotFoundException {
+    public void findByIdAndDelete(@PathVariable int id) {
         indirizzoService.findByIdAndDelete(id);
     }
 
