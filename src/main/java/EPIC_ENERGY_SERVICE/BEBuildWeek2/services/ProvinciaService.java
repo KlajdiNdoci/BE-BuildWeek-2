@@ -35,5 +35,6 @@ public class ProvinciaService {
 
     public Provincia getByNome(String nome) {
         return provinciaRepository.findByNome(nome);
+
     }
 }

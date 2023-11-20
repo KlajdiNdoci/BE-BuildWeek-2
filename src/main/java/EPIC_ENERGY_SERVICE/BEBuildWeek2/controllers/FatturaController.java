@@ -1,17 +1,6 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.controllers;
 
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.BadRequestException;
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.ErrorList;
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.ClientePayload;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-
-@RestController
+/*@RestController
 @RequestMapping("/fatture")
 public class FatturaController {
     @Autowired
@@ -19,8 +8,8 @@ public class FatturaController {
 
     @GetMapping("")
     public Page<Fattura> getFatture(@RequestParam(defaultValue = "0") int page,
-                                @RequestParam(defaultValue = "10") int size,
-                                @RequestParam(defaultValue = "id") String orderBy){
+                                    @RequestParam(defaultValue = "10") int size,
+                                    @RequestParam(defaultValue = "id") String orderBy){
         return fatturaService.getFatture(page, size, orderBy);
     }
 
@@ -53,4 +42,4 @@ public class FatturaController {
             return fatturaService.findByIdAndUpdate(id, body);
         }
     }
-}
+}*/
