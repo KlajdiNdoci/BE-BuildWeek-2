@@ -2,7 +2,7 @@ package EPIC_ENERGY_SERVICE.BEBuildWeek2.controllers;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Provincia;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.NuovaProvinciaDTO;
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.service.ProvinciaService;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.services.ProvinciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -34,6 +34,7 @@ public class ProvinciaController {
 
     @ResponseStatus(HttpStatus.CREATED)
     public Provincia save(@RequestBody NuovaProvinciaDTO body) {
-        return provinciaService.save(body);
+        Provincia p = Provincia.builder().nome(body.nome()).regione(body.regione()).sigla(body.sigla()).build();
+        return provinciaService.save(p);
     }
 }
