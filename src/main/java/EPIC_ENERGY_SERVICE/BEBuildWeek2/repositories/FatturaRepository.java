@@ -1,10 +1,10 @@
-package repository;
-import entities.Cliente;
-import entities.Fattura;
+package EPIC_ENERGY_SERVICE.BEBuildWeek2.repositories;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Cliente;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Fattura;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import utils.StatoFattura;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.utils.StatoFattura;
 
 import java.util.Date;
 

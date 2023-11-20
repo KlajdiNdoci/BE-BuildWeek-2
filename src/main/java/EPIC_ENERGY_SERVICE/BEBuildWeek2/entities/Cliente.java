@@ -1,4 +1,4 @@
-package entities;
+package EPIC_ENERGY_SERVICE.BEBuildWeek2.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import utils.TipoCliente;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.utils.TipoCliente;
 import java.time.LocalDate;
 import java.util.List;
 

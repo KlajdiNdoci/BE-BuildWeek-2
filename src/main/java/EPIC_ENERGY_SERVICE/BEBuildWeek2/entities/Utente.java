@@ -1,11 +1,11 @@
-package entities;
+package EPIC_ENERGY_SERVICE.BEBuildWeek2.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import utils.TipoUtente;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.utils.TipoUtente;
 
 @Entity
 @Table(name= "entities.Utenti")
@@ -14,10 +14,10 @@ import utils.TipoUtente;
 @Data
 @Builder
 
-public class Utenti {
+public class Utente {
     @Id
     @GeneratedValue
-    private int idUtenti;
+    private int idUtente;
     private String nome;
     private String cognome;
     private String username;
@@ -26,6 +26,15 @@ public class Utenti {
     @Enumerated(EnumType.STRING)
     private TipoUtente ruoloUtente;
 
+
+    public Utente( String username, String nome, String cognome,  String emailUtente, String password) {
+
+        this.nome = nome;
+        this.cognome = cognome;
+        this.username = username;
+        this.emailUtente = emailUtente;
+        this.password = password;
+    }
 }
 
 
