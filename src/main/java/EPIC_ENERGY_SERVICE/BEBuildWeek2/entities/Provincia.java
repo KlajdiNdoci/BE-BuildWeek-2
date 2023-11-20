@@ -1,13 +1,17 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "provincie")
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Provincia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,4 +21,6 @@ public class Provincia {
     private String regione;
     @OneToMany(mappedBy = "provincia")
     private List<Comune> comuni;
+
+
 }

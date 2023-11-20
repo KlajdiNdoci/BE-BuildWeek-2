@@ -1,11 +1,15 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @Entity
 @Table(name = "indirizzi")
-@Data
+@Getter
+@Setter
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Indirizzo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

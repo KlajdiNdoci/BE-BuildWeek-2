@@ -1,8 +1,7 @@
-package EPIC_ENERGY_SERVICE.BEBuildWeek2.service;
+package EPIC_ENERGY_SERVICE.BEBuildWeek2.services;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Provincia;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.NotFoundException;
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.NuovaProvinciaDTO;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.repositories.ProvinciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,12 +15,8 @@ public class ProvinciaService {
     @Autowired
     private ProvinciaRepository provinciaRepository;
 
-    public Provincia save(NuovaProvinciaDTO body) {
-        Provincia provincia = new Provincia();
-        provincia.setNome(body.nome());
-        provincia.setSigla(body.sigla());
-        provincia.setRegione(body.regione());
-        return provinciaRepository.save(provincia);
+    public Provincia save(Provincia body) {
+        return provinciaRepository.save(body);
     }
 
     public Page<Provincia> getProvincie(int page, int size, String orderBy) {
@@ -36,5 +31,9 @@ public class ProvinciaService {
     public void findByIdAndDelete(int id) {
         Provincia found = provinciaRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         provinciaRepository.delete(found);
+    }
+
+    public Provincia getByNome(String nome) {
+        return provinciaRepository.findByNome(nome);
     }
 }

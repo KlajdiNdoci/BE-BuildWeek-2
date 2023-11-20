@@ -1,8 +1,7 @@
-package EPIC_ENERGY_SERVICE.BEBuildWeek2.service;
+package EPIC_ENERGY_SERVICE.BEBuildWeek2.services;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Comune;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.NotFoundException;
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.NuovoComuneDTO;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.repositories.ComuneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,12 +15,9 @@ public class ComuneService {
     @Autowired
     private ComuneRepository comuneRepository;
 
-    public Comune save(NuovoComuneDTO body) {
-        Comune comune = new Comune();
-        comune.setNome(body.nome());
-        comune.setProgressivoDelComune(body.progressivoDelComune());
-        comune.setProvincia(body.provincia());
-        return comuneRepository.save(comune);
+    public Comune save(Comune body) {
+
+        return comuneRepository.save(body);
     }
 
     public Page<Comune> getComuni(int page, int size, String orderBy) {

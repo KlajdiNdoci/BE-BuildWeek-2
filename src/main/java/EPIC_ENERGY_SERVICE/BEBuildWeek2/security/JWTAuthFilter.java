@@ -1,5 +1,6 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.security;
 
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Utente;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.UnauthorizedException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -20,23 +21,23 @@ public class JWTAuthFilter extends OncePerRequestFilter {
     @Autowired
     private JWTTools jwtTools;
     @Autowired
-//    private UtenteService utenteService;
+    private UtenteService utenteService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
         String authHeader = request.getHeader("Authorization");
-        if (authHeader == null || !authHeader.startsWith("Bearer ")){
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
             throw new UnauthorizedException("Use the Bearer Token in the Authorization header");
-        }else {
+        } else {
             String token = authHeader.substring(7);
             jwtTools.verifyToken(token);
 
             String id = jwtTools.extractIdFromToken(token);
-//            Utente currentUser = utenteService.findById(Long.parseLong(id));
+            Utente currentUser = utenteService.findById(Long.parseLong(id));
 
-//            Authentication authentication = new UsernamePasswordAuthenticationToken(currentUser, null, currentUser.getAuthorities());
-//            SecurityContextHolder.getContext().setAuthentication(authentication);
+            Authentication authentication = new UsernamePasswordAuthenticationToken(currentUser, null, currentUser.getAuthorities());
+            SecurityContextHolder.getContext().setAuthentication(authentication);
 
             filterChain.doFilter(request, response);
         }

@@ -2,7 +2,7 @@ package EPIC_ENERGY_SERVICE.BEBuildWeek2.controllers;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Comune;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.NuovoComuneDTO;
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.service.ComuneService;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.services.ComuneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -32,8 +32,10 @@ public class ComuneController {
         comuneService.findByIdAndDelete(id);
     }
 
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public Comune save(@RequestBody NuovoComuneDTO body) {
-        return comuneService.save(body);
+        Comune c = Comune.builder().progressivoDelComune(body.progressivoDelComune()).nome(body.nome()).provincia(body.provincia()).build();
+        return comuneService.save(c);
     }
 }

@@ -1,13 +1,11 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.services;
 
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.UnauthorizedException;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Utente;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.UtenteLoginDTO;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.security.JWTTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
 
 @Service
 public class AuthService {
@@ -15,8 +13,8 @@ public class AuthService {
     PasswordEncoder bcrypt;
     @Autowired
     UtenteRepository utenteRepository;
-    @Autowired
-    private UtenteService utenteService;
+    //    @Autowired
+//    private UtenteService utenteService;
     @Autowired
     private JWTTools jwtTools;
 

@@ -9,7 +9,6 @@ import java.util.List;
 @Table(name = "comuni")
 @Setter
 @Getter
-@ToString
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor

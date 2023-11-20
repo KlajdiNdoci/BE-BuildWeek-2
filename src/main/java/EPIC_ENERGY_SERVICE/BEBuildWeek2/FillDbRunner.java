@@ -1,5 +1,9 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2;
 
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Comune;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Provincia;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.services.ComuneService;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.services.ProvinciaService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -13,9 +17,9 @@ import java.util.List;
 @Component
 public class FillDbRunner implements CommandLineRunner {
     @Autowired
-    private ProvinceService provinceService;
+    private ProvinciaService provinciaService;
     @Autowired
-    private ComuniService comuniService;
+    private ComuneService comuneService;
 
     @Override
     public void run(String... args) throws Exception {
@@ -33,19 +37,18 @@ public class FillDbRunner implements CommandLineRunner {
         List<String> comuniList = new ArrayList<>(List.of(stringComuni.split(System.lineSeparator())));
         comuniList.remove(comuniList.get(0));
 
-        if (provinceService.getAll() == null)
-            for (int i = 0; i < provinceList.size(); i++) {
-                List<String> arr = List.of(provinceList.get(i).split(";"));
-                Province p = Province.builder().sigla(arr.get(0)).nome(arr.get(1)).regione(arr.get(2)).build();
-                provinceService.save(p);
-            }
-        if (comuniService.getAll() == null)
-            for (int i = 0; i < comuniList.size(); i++) {
-                List<String> arr = List.of(comuniList.get(i).split(";"));
-                Province p = provinceService.getByNome(arr.get(3));
-                Comune c = Comune.builder().progressivoDelComune(arr.get(1)).nome(arr.get(2)).provincia(p).buil();
-                comuniService.save(c);
-            }
+
+        for (int i = 0; i < provinceList.size(); i++) {
+            List<String> arr = List.of(provinceList.get(i).split(";"));
+            Provincia p = Provincia.builder().sigla(arr.get(0)).nome(arr.get(1)).regione(arr.get(2)).build();
+            provinciaService.save(p);
+        }
+        for (int i = 0; i < comuniList.size(); i++) {
+            List<String> arr = List.of(comuniList.get(i).split(";"));
+            Provincia p = provinciaService.getByNome(arr.get(3));
+            Comune c = Comune.builder().progressivoDelComune(Integer.parseInt(arr.get(1))).nome(arr.get(2)).provincia(p).build();
+            comuneService.save(c);
+        }
 
     }
 }
