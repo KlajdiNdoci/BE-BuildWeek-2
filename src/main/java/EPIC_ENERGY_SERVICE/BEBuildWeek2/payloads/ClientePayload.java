@@ -1,5 +1,7 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads;
 
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Indirizzo;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.utils.TipoCliente;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

@@ -44,9 +44,9 @@ public class Cliente {
     @OneToMany(mappedBy = "idCliente")
     @JsonIgnore
     private List<Fattura> fatture;
-   /* @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "indirizzo_id")
-    private Indirizzo indirizzo;*/
+    private Indirizzo indirizzo;
 }
 
 

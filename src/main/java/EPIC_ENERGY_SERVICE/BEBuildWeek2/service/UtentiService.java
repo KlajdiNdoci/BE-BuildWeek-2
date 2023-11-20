@@ -17,7 +17,7 @@ public class UtentiService {
     @Autowired
     private UtenteRepository utenteRepository;
 
-    public Page<Utente> findAllUtenti(int page, int size, String sortBy) {
+    public Page<Utente> findAll(int page, int size, String sortBy) {
         if (size < 0)
             size = 10;
         if (size > 100)
@@ -25,7 +25,7 @@ public class UtentiService {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return utenteRepository.findAll(pageable);
     }
-    public Utente createUtente(UtentePayload u) {
+    public Utente save(UtentePayload u) {
         utenteRepository.findByEmailUtente(u.getEmail()).ifPresent(user -> {
             throw new BadRequestException("L email " + user.getEmailUtente() + "è già in uso");
         });
@@ -39,7 +39,7 @@ public class UtentiService {
 
     }
 
-    public Utente findUtenteByIdAndUpdate(int id, UtentePayload u) throws NotFoundException {
+    public Utente findByIdAndUpdate(int id, UtentePayload u) throws NotFoundException {
         Utente foundUser = this.findUtenteById(id);
         foundUser.setIdUtente(id);
         foundUser.setUsername(u.getUsername());
@@ -49,18 +49,13 @@ public class UtentiService {
         return utenteRepository.save(foundUser);
     }
 
-    public void findUtenteByIdAndDelete(int id) throws NotFoundException {
+    public void findByIdAndDelete(int id) throws NotFoundException {
         Utente foundUtente = this.findUtenteById(id);
         utenteRepository.delete(foundUtente);
     }
 
     public Utente findUtenteByEmail(String email) throws NotFoundException {
         return utenteRepository.findByEmailUtente(email).orElseThrow(() -> new NotFoundException(email));
-    }
-
-    public void findByIdAndDelete(int id) {
-        Utente u = findUtenteById(id);
-        utenteRepository.delete(u);
     }
 
     public void deleteAllUtenti() {
