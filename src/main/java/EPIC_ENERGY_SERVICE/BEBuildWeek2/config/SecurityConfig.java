@@ -1,6 +1,7 @@
-package EPIC_ENERGY_SERVICE.BEBuildWeek2.security;
+package EPIC_ENERGY_SERVICE.BEBuildWeek2.config;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.ExceptionsHandlerFilter;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.security.JWTAuthFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
