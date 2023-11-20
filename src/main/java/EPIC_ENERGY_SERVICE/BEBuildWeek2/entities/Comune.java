@@ -1,13 +1,18 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.entities;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "comuni")
-@Data
+@Setter
+@Getter
+@ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Comune {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
