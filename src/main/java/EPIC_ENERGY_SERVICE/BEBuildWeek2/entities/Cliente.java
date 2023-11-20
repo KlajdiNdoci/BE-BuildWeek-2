@@ -5,6 +5,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.utils.TipoCliente;
 import java.time.LocalDate;
 import java.util.List;
 

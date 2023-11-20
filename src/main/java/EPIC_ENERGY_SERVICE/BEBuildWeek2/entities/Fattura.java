@@ -4,6 +4,11 @@ import EPIC_ENERGY_SERVICE.BEBuildWeek2.utils.StatoFattura;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.utils.StatoFattura;
 
 @Entity
 @Getter
