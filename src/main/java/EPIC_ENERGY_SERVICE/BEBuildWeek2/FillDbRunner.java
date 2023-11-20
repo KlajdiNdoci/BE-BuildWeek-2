@@ -33,18 +33,19 @@ public class FillDbRunner implements CommandLineRunner {
         List<String> comuniList = new ArrayList<>(List.of(stringComuni.split(System.lineSeparator())));
         comuniList.remove(comuniList.get(0));
 
-        for (int i = 0; i < provinceList.size(); i++) {
-            List<String> arr = List.of(provinceList.get(i).split(";"));
-            Province p = Province.builder().sigla(arr.get(0)).nome(arr.get(1)).regione(arr.get(2)).build();
-            provinceService.save(p);
-        }
-
-        for (int i = 0; i < comuniList.size(); i++) {
-            List<String> arr = List.of(comuniList.get(i).split(";"));
-            Province p = provinceService.getByNome(arr.get(3));
-            Comune c = Comune.builder().progressivoDelComune(arr.get(1)).nome(arr.get(2)).provincia(p).buil();
-            comuniService.save(c);
-        }
+        if (provinceService.getAll() == null)
+            for (int i = 0; i < provinceList.size(); i++) {
+                List<String> arr = List.of(provinceList.get(i).split(";"));
+                Province p = Province.builder().sigla(arr.get(0)).nome(arr.get(1)).regione(arr.get(2)).build();
+                provinceService.save(p);
+            }
+        if (comuniService.getAll() == null)
+            for (int i = 0; i < comuniList.size(); i++) {
+                List<String> arr = List.of(comuniList.get(i).split(";"));
+                Province p = provinceService.getByNome(arr.get(3));
+                Comune c = Comune.builder().progressivoDelComune(arr.get(1)).nome(arr.get(2)).provincia(p).buil();
+                comuniService.save(c);
+            }
 
     }
 }
