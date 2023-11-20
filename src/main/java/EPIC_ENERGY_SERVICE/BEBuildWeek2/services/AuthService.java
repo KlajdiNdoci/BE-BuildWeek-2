@@ -1,6 +1,7 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.services;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.UnauthorizedException;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.UtenteLoginDTO;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.security.JWTTools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,7 +20,7 @@ public class AuthService {
     @Autowired
     private JWTTools jwtTools;
 
-    public String authenticateUser(UserLoginDTO body) {
+    public String authenticateUser(UtenteLoginDTO body) {
         Utente user = utenteService.findByEmail(body.email());
         if (bcrypt.matches(body.password(), user.getPassword())) {
             return jwtTools.createToken(user);
@@ -37,6 +38,7 @@ public class AuthService {
 
         Utente newUser = new Utente();
         newUser.setUsername(body.username());
+
         newUser.setNome(body.nome());
         newUser.setCognome(body.cognome());
         newUser.setRuolo("USER");
