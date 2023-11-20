@@ -5,11 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.utils.TipoCliente;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -23,7 +18,7 @@ import java.util.List;
 public class Cliente {
     @Id
     @GeneratedValue
-    private int idCliente;
+    private int id;
     private String ragioneSociale;
     private String partitaIva;
     private String email;
@@ -47,9 +42,9 @@ public class Cliente {
     @OneToMany(mappedBy = "idCliente")
     @JsonIgnore
     private List<Fattura> fatture;
-   /* @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "indirizzo_id")
-    private Indirizzo indirizzo;*/
+    private Indirizzo indirizzo;
 }
 
 

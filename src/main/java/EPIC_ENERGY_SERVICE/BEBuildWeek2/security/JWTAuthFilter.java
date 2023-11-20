@@ -2,6 +2,7 @@ package EPIC_ENERGY_SERVICE.BEBuildWeek2.security;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Utente;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.UnauthorizedException;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.services.UtenteService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,7 +35,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
             jwtTools.verifyToken(token);
 
             String id = jwtTools.extractIdFromToken(token);
-            Utente currentUser = utenteService.findById(Long.parseLong(id));
+            Utente currentUser = utenteService.findUtenteById(Integer.parseInt(id));
 
             Authentication authentication = new UsernamePasswordAuthenticationToken(currentUser, null, currentUser.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);

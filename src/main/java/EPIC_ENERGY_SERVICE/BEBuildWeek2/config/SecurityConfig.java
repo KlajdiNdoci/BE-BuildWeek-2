@@ -15,8 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -34,7 +32,7 @@ public class SecurityConfig {
         httpSecurity.formLogin(AbstractHttpConfigurer::disable);
         httpSecurity.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
         httpSecurity.addFilterBefore(exceptionsHandlerFilter, JWTAuthFilter.class);
-        httpSecurity.cors(withDefaults());
+//        httpSecurity.cors(withDefaults());
         httpSecurity.authorizeHttpRequests(request -> request.requestMatchers("/**").permitAll());
         return httpSecurity.build();
     }
