@@ -1,0 +1,23 @@
+h1 {
+  font-size: 40px;
+  text-shadow: 5px 5px 5px gray;
+  font-style: italic;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  margin-inline: 10px;
+}
+
+.selected {
+  text-decoration: underline;
+}
+
+#page {
+  margin-inline: 10px;
+}
+
+a.page-link {
+  margin: 0;
+}
