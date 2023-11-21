@@ -4,6 +4,7 @@ import EPIC_ENERGY_SERVICE.BEBuildWeek2.utils.TipoCliente;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,15 +17,17 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cliente {
+    @CreationTimestamp
+    @Temporal(TemporalType.DATE)
+    protected LocalDate dataInserimento;
     @Id
     @GeneratedValue
     private int id;
     private String ragioneSociale;
     private String partitaIva;
     private String email;
-    private LocalDate dataInserimento;
     private LocalDate dataUltimoContatto;
-    private Double fatturatoAnnuale;
+    private double fatturatoAnnuale;
     private String pec;
     private String telefeno;
     @JoinColumn(name = "email_utente")
@@ -43,8 +46,11 @@ public class Cliente {
     @JsonIgnore
     private List<Fattura> fatture;
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "indirizzo_id")
-    private Indirizzo indirizzo;
+    @JoinColumn(name = "indirizzoLegale_id")
+    private Indirizzo indirizzoSedeLegale;
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "indirizzo_operativo_id")
+    private Indirizzo indirizzoSedeOperativa;
 }
 
 

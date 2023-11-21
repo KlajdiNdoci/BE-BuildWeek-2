@@ -4,7 +4,6 @@ import EPIC_ENERGY_SERVICE.BEBuildWeek2.utils.StatoFattura;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.utils.StatoFattura;
 
 import java.time.LocalDate;
 
@@ -22,11 +21,11 @@ public class Fattura {
     private LocalDate data;
     private int numeroFattura;
     private StatoFattura statoFattura;
+    private double importo;
     @ManyToOne
     @JoinColumn(name = "idCliente")
     @JsonIgnore
     private Cliente idCliente;
 
-    public Fattura(int importo, LocalDate data, int numeroFattura, StatoFattura statoFattura, Cliente idCliente) {
-    }
+
 }

@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
+import java.time.LocalDate;
+
 public record ClientePayload(
 
         @NotEmpty(message = "Il campo ragione sociale non può essere vuoto")
@@ -34,6 +36,9 @@ public record ClientePayload(
         @NotNull(message = "Il campo sede legale non può essere vuoto")
         Indirizzo sedeLegale,
         @NotNull(message = "Il campo sede operativa non può essere vuoto")
-        Indirizzo sedeOperativa
+        Indirizzo sedeOperativa,
+
+        @NotEmpty(message = "Il campo data ultimo contatto non può essere vuoto")
+        LocalDate dataUltimoContatto
 ) {
 }

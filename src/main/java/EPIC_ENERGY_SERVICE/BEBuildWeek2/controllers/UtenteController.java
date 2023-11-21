@@ -25,7 +25,7 @@ public class UtenteController {
     public Page<Utente> getUser(@RequestParam(defaultValue = "0") int page,
                                 @RequestParam(defaultValue = "10") int size,
                                 @RequestParam(defaultValue = "id") String orderBy) {
-        return utenteService.findAllUtenti(page, size, orderBy);
+        return utenteService.findAll(page, size > 20 ? 5 : size, orderBy);
     }
 
 
@@ -47,7 +47,7 @@ public class UtenteController {
         if (validation.hasErrors()) {
             throw new BadRequestException(validation.getAllErrors());
         } else {
-            return utenteService.findUtenteByIdAndUpdate(id, body);
+            return utenteService.findByIdAndUpdate(id, body);
         }
     }
 
@@ -59,7 +59,7 @@ public class UtenteController {
 
     @PutMapping("/me")
     public UserDetails updateProfile(@AuthenticationPrincipal Utente currentUser, @RequestBody UtentePayload body) {
-        return utenteService.findUtenteByIdAndUpdate(currentUser.getId(), body);
+        return utenteService.findByIdAndUpdate(currentUser.getId(), body);
     }
 
     @DeleteMapping("/me")

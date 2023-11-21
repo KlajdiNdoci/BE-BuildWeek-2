@@ -3,6 +3,7 @@ package EPIC_ENERGY_SERVICE.BEBuildWeek2.controllers;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Cliente;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.ErrorList;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.ClientePayload;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -11,7 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.services.ClienteService;
+
+import java.io.IOException;
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/clienti")
@@ -28,12 +31,12 @@ public class ClienteController {
 
     @GetMapping("/{id}")
     public Cliente getSingleCliente(@PathVariable int id) {
-        return clienteService.getSingleCliente(id);
+        return clienteService.getById(id);
     }
 
     @GetMapping("/getbydata")
-    public Page<Cliente> getByData(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam(defaultValue = "id") String order,@RequestParam String data){
-        return clienteService.getByData(page, size > 20 ? 5 : size, order,data);
+    public Page<Cliente> getByDatainserimento(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam(defaultValue = "id") String order, @RequestParam LocalDate data) {
+        return clienteService.getByDataInserimento(page, size > 20 ? 5 : size, order, data);
 
     }
 
@@ -46,7 +49,7 @@ public class ClienteController {
     }
 
     @PutMapping("/upload_img")
-    public Cliente uploadImg(@RequestParam("logo") MultipartFile file) {
+    public String uploadImg(@RequestParam("logo") MultipartFile file) throws IOException {
         return clienteService.uploadImg(file);
     }
 
@@ -57,4 +60,4 @@ public class ClienteController {
         clienteService.deleteCliente(id);
     }
 
-}*/
+}
