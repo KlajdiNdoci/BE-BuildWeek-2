@@ -17,11 +17,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Cliente {
+
     @CreationTimestamp
     @Temporal(TemporalType.DATE)
     protected LocalDate dataInserimento;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String ragioneSociale;
     private String partitaIva;
@@ -29,7 +30,7 @@ public class Cliente {
     private LocalDate dataUltimoContatto;
     private double fatturatoAnnuale;
     private String pec;
-    private String telefeno;
+    private String telefono;
     @JoinColumn(name = "email_utente")
     private String emailContatto;
     @JoinColumn(name = "nome_utente")
@@ -37,17 +38,19 @@ public class Cliente {
     @JoinColumn(name = "cognome_utente")
     private String cognomeContatto;
     @JoinColumn(name = "telefono_utente")
-    private String telefenoContatto;
+    private String telefonoContatto;
     private String logoAziendale;
     @Enumerated(EnumType.STRING)
     private TipoCliente tipoCliente;
-
-    @OneToMany(mappedBy = "idCliente")
+    
     @JsonIgnore
+    @OneToMany(mappedBy = "idCliente")
     private List<Fattura> fatture;
+
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "indirizzoLegale_id")
     private Indirizzo indirizzoSedeLegale;
+
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "indirizzo_operativo_id")
     private Indirizzo indirizzoSedeOperativa;
