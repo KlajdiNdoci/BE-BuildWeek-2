@@ -1,6 +1,7 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -54,5 +55,13 @@ public class ExceptionsHandler {
         return new ErrorsResponseDTO(e.getMessage(), new Date());
     }
 
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorsResponseDTO handleNotFound(HttpMessageNotReadableException e){
+        if (e.getMessage().equals("Required request body is missing: public EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Utente EPIC_ENERGY_SERVICE.BEBuildWeek2.controllers.AuthController.saveUser(EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.NewUserDTO,org.springframework.validation.BindingResult)") ){
+            return new ErrorsResponseDTO("Seleziona il formato corretto del body", new Date());
+        }
+        return new ErrorsResponseDTO(e.getMessage(), new Date());
+    }
 
 }
