@@ -1,6 +1,7 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.services;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Cliente;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Indirizzo;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.ClientePayload;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.repositories.ClienteRepository;
 import com.cloudinary.Cloudinary;
@@ -23,6 +24,8 @@ public class ClienteService {
     private final ClienteRepository clienteRepository;
     @Autowired
     private Cloudinary cloudinary;
+    @Autowired
+    private IndirizzoService indirizzoService;
 
     public ClienteService(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
@@ -44,12 +47,26 @@ public class ClienteService {
 
 
     public Cliente save(ClientePayload cliente) {
-        Cliente c = Cliente.builder().ragioneSociale(cliente.ragioneSociale()).partitaIva(cliente.partitaIva()).email(cliente.email()).fatturatoAnnuale(cliente.fatturatoAnnuale()).pec(cliente.pec()).telefeno(cliente.telefono()).emailContatto(cliente.emailContatto()).nomeContatto(cliente.nomeContatto()).cognomeContatto(cliente.cognomeContatto()).telefenoContatto(cliente.telefonoContatto()).indirizzoSedeLegale(cliente.sedeLegale()).indirizzoSedeOperativa(cliente.sedeOperativa()).build();
+        Indirizzo sl = null;
+        Indirizzo so = null;
+
+        if (cliente.sedeLegale() != null)
+            sl = indirizzoService.findById(Integer.parseInt(cliente.sedeLegale()));
+        if (cliente.sedeOperativa() != null)
+            so = indirizzoService.findById(Integer.parseInt(cliente.sedeOperativa()));
+        Cliente c = Cliente.builder().ragioneSociale(cliente.ragioneSociale()).partitaIva(cliente.partitaIva()).email(cliente.email()).fatturatoAnnuale(cliente.fatturatoAnnuale()).pec(cliente.pec()).telefeno(cliente.telefono()).emailContatto(cliente.emailContatto()).nomeContatto(cliente.nomeContatto()).cognomeContatto(cliente.cognomeContatto()).telefenoContatto(cliente.telefonoContatto()).indirizzoSedeLegale(sl).indirizzoSedeOperativa(so).build();
         return clienteRepository.save(c);
     }
 
 
     public Cliente findByIdAndUpadate(int idCliente, ClientePayload updatedCliente) {
+        Indirizzo sl = null;
+        Indirizzo so = null;
+
+        if (updatedCliente.sedeLegale() != null)
+            sl = indirizzoService.findById(Integer.parseInt(updatedCliente.sedeLegale()));
+        if (updatedCliente.sedeOperativa() != null)
+            so = indirizzoService.findById(Integer.parseInt(updatedCliente.sedeOperativa()));
         Cliente cliente = this.getById(idCliente);
         cliente.setPartitaIva(updatedCliente.partitaIva().isEmpty() ? cliente.getPartitaIva() : updatedCliente.partitaIva());
         cliente.setRagioneSociale(updatedCliente.ragioneSociale().isEmpty() ? cliente.getRagioneSociale() : updatedCliente.ragioneSociale());
@@ -59,8 +76,8 @@ public class ClienteService {
         cliente.setPec(updatedCliente.pec().isEmpty() ? cliente.getPec() : updatedCliente.pec());
         cliente.setTelefeno(updatedCliente.telefono().isEmpty() ? cliente.getTelefeno() : updatedCliente.telefono());
         cliente.setTelefenoContatto(updatedCliente.telefonoContatto().isEmpty() ? cliente.getTelefenoContatto() : updatedCliente.telefonoContatto());
-        cliente.setIndirizzoSedeLegale(updatedCliente.sedeLegale() == null ? cliente.getIndirizzoSedeLegale() : updatedCliente.sedeLegale());
-        cliente.setIndirizzoSedeOperativa(updatedCliente.sedeOperativa() == null ? cliente.getIndirizzoSedeOperativa() : updatedCliente.sedeOperativa());
+        cliente.setIndirizzoSedeLegale(sl == null ? cliente.getIndirizzoSedeLegale() : sl);
+        cliente.setIndirizzoSedeOperativa(so == null ? cliente.getIndirizzoSedeOperativa() : so);
         return clienteRepository.save(cliente);
     }
 

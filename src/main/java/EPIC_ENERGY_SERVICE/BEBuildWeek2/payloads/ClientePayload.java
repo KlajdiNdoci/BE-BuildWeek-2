@@ -1,6 +1,5 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads;
 
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Indirizzo;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.utils.TipoCliente;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -33,10 +32,8 @@ public record ClientePayload(
         String telefonoContatto,
         @NotNull(message = "Il campo tipo cliente non può essere vuoto")
         TipoCliente tipoCliente,
-        @NotNull(message = "Il campo sede legale non può essere vuoto")
-        Indirizzo sedeLegale,
-        @NotNull(message = "Il campo sede operativa non può essere vuoto")
-        Indirizzo sedeOperativa,
+        String sedeLegale,
+        String sedeOperativa,
 
         @NotEmpty(message = "Il campo data ultimo contatto non può essere vuoto")
         LocalDate dataUltimoContatto
