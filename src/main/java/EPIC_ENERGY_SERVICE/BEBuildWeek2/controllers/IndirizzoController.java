@@ -18,7 +18,7 @@ public class IndirizzoController {
     public Page<Indirizzo> getIndirizzi(@RequestParam(defaultValue = "0") int page,
                                         @RequestParam(defaultValue = "10") int size,
                                         @RequestParam(defaultValue = "id") String orderBy) {
-        return indirizzoService.getIndirizzi(page, size, orderBy);
+        return indirizzoService.getIndirizzi(page, size > 20 ? 5 : size, orderBy);
     }
 
     @GetMapping(value = "/{id}")

@@ -22,8 +22,8 @@ public class FatturaController {
     @GetMapping("")
     public Page<Fattura> getFatture(@RequestParam(defaultValue = "0") int page,
                                     @RequestParam(defaultValue = "10") int size,
-                                    @RequestParam(defaultValue = "id") String orderBy){
-        return fatturaService.findAll(page, size, orderBy);
+                                    @RequestParam(defaultValue = "id") String orderBy) {
+        return fatturaService.findAll(page, size > 20 ? 5 : size, orderBy);
     }
 
     @GetMapping("/{id}")
@@ -49,9 +49,9 @@ public class FatturaController {
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public Fattura findByIdAndUpdate(@PathVariable int id, @RequestBody @Validated FatturaPayload body, BindingResult validation) {
-        if (validation.hasErrors()){
+        if (validation.hasErrors()) {
             throw new BadRequestException(validation.getAllErrors());
-        }else {
+        } else {
             return fatturaService.findByIdAndUpdate(body, id);
         }
     }

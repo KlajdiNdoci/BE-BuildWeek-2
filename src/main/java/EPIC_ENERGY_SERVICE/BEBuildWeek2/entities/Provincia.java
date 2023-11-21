@@ -1,5 +1,6 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -19,6 +20,7 @@ public class Provincia {
     private String sigla;
     private String nome;
     private String regione;
+    @JsonIgnore
     @OneToMany(mappedBy = "provincia")
     private List<Comune> comuni;
 

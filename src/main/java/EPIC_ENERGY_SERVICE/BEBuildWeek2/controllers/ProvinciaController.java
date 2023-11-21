@@ -9,16 +9,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/provincie")
+@RequestMapping("/province")
 public class ProvinciaController {
     @Autowired
     private ProvinciaService provinciaService;
 
     @GetMapping("")
-    public Page<Provincia> getProvincie(@RequestParam(defaultValue = "0") int page,
-                                        @RequestParam(defaultValue = "10") int size,
-                                        @RequestParam(defaultValue = "id") String orderBy) {
-        return provinciaService.getProvincie(page, size, orderBy);
+    public Page<Provincia> getProvince(@RequestParam(defaultValue = "0") int page,
+                                       @RequestParam(defaultValue = "10") int size,
+                                       @RequestParam(defaultValue = "id") String orderBy) {
+        return provinciaService.getProvincie(page, size > 20 ? 5 : size, orderBy);
     }
 
     @GetMapping(value = "/{id}")
