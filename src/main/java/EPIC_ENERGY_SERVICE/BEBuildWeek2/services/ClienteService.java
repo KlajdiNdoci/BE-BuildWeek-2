@@ -2,6 +2,7 @@ package EPIC_ENERGY_SERVICE.BEBuildWeek2.services;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Cliente;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Indirizzo;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.NotFoundException;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.ClientePayload;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.repositories.ClienteRepository;
 import com.cloudinary.Cloudinary;
@@ -26,6 +27,8 @@ public class ClienteService {
     private Cloudinary cloudinary;
     @Autowired
     private IndirizzoService indirizzoService;
+    @Autowired
+    private CloudinaryService cloudinaryService;
 
     public ClienteService(ClienteRepository clienteRepository) {
         this.clienteRepository = clienteRepository;
@@ -42,7 +45,7 @@ public class ClienteService {
 
 
     public Cliente getById(int idCliente) {
-        return clienteRepository.findById(idCliente).orElse(null);
+        return clienteRepository.findById(idCliente).orElseThrow(()-> new NotFoundException(idCliente));
     }
 
 
@@ -83,6 +86,8 @@ public class ClienteService {
 
 
     public void findByIdAndDelete(int idCliente) {
+        Cliente c = this.getById(idCliente);
+        cloudinaryService.deleteImageByUrl(c.getLogoAziendale());
         clienteRepository.deleteById(idCliente);
     }
 
@@ -109,12 +114,17 @@ public class ClienteService {
     }
 
 
-    public String uploadImg(MultipartFile file) throws IOException {
-        return (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+    public Cliente uploadImg(MultipartFile file, int id) throws IOException {
+        Cliente c = clienteRepository.findById(id).orElseThrow(()-> new NotFoundException(id));
+        String url = (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+        c.setLogoAziendale(url);
+        clienteRepository.save(c);
+        return c;
     }
 
     public void deleteCliente(int id) {
         Cliente c = getById(id);
+        cloudinaryService.deleteImageByUrl(c.getLogoAziendale());
         clienteRepository.delete(c);
     }
 }

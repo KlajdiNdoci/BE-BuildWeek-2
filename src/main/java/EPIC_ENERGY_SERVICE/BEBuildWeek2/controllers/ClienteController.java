@@ -42,6 +42,7 @@ public class ClienteController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Cliente createCliente(@RequestBody @Validated ClientePayload body, BindingResult validation) {
         if (validation.hasErrors()) {
             throw new ErrorList(validation.getAllErrors());
@@ -54,15 +55,17 @@ public class ClienteController {
         }
     }
 
-    @PutMapping("/upload_img")
-    public String uploadImg(@RequestParam("logo") MultipartFile file) throws IOException {
-        return clienteService.uploadImg(file);
+    @PutMapping("/{id}/upload_img")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public Cliente uploadImg(@RequestParam("logo") MultipartFile file, @PathVariable int id) throws IOException {
+        return clienteService.uploadImg(file, id);
     }
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCliente(@PathVariable int id) {
+
         clienteService.deleteCliente(id);
     }
 
