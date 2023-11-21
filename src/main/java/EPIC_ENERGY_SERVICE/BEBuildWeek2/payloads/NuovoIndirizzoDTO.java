@@ -1,6 +1,5 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads;
 
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Comune;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
@@ -13,7 +12,7 @@ public record NuovoIndirizzoDTO(
         String località,
         @NotNull(message = "Il campo CAP non può essere vuoto")
         int cap,
-        @NotNull(message = "Il campo comune non può essere vuoto")
-        Comune comune
+        @NotEmpty(message = "Il campo comune non può essere vuoto")
+        String comune
 ) {
 }

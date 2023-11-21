@@ -32,6 +32,7 @@ public class IndirizzoController {
         indirizzoService.findByIdAndDelete(id);
     }
 
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public Indirizzo save(@RequestBody NuovoIndirizzoDTO body) {
         return indirizzoService.save(body);

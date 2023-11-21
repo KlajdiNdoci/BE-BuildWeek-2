@@ -32,6 +32,7 @@ public class ProvinciaController {
         provinciaService.findByIdAndDelete(id);
     }
 
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
     public Provincia save(@RequestBody NuovaProvinciaDTO body) {
         Provincia p = Provincia.builder().nome(body.nome()).regione(body.regione()).sigla(body.sigla()).build();

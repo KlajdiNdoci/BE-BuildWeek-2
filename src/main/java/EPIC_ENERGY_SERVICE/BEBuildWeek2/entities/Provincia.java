@@ -21,7 +21,7 @@ public class Provincia {
     private String nome;
     private String regione;
     @JsonIgnore
-    @OneToMany(mappedBy = "provincia")
+    @OneToMany(mappedBy = "provincia", cascade = CascadeType.REMOVE)
     private List<Comune> comuni;
 
 
