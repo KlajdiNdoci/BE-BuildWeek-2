@@ -18,6 +18,12 @@ public class ClienteController {
         return clienteService.getSingleCliente(id);
     }
 
+    @GetMapping("/getbydata")
+    public Page<Cliente> getByData(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam(defaultValue = "id") String order,@RequestParam String data){
+        return clienteService.getByData(page, size > 20 ? 5 : size, order,data);
+
+    }
+
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente createCliente(@RequestBody @Validated ClientePayload body, BindingResult validation) {
