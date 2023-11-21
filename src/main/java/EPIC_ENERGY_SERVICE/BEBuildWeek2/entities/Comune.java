@@ -1,5 +1,6 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -18,6 +19,7 @@ public class Comune {
     private int id;
     private int progressivoDelComune;
     private String nome;
+    @JsonIgnore
     @OneToMany(mappedBy = "comune")
     private List<Indirizzo> indirizzi;
     @ManyToOne
