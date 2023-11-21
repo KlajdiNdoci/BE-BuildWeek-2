@@ -20,4 +20,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     Page<Cliente> findByDataUltimoContatto(Pageable pageable, LocalDate date);
 
     Page<Cliente> findByFatturatoAnnuale(Pageable pageable, double fatturato);
+
+    Page<List<Cliente>> findByNomeContattoStartingWithIgnoreCase(Pageable pageable, String nome);
 }
