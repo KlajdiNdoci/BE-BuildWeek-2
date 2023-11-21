@@ -40,13 +40,64 @@ public class FillDbRunner implements CommandLineRunner {
             List<String> arr = List.of(provinceList.get(i).split(";"));
             Provincia p = Provincia.builder().sigla(arr.get(0)).nome(arr.get(1)).regione(arr.get(2)).build();
             provinciaService.save(p);
-        }*/
-      /*  for (int i = 0; i < comuniList.size(); i++) {
+        }
+        int cont = 1;
+        for (int i = 0; i < comuniList.size(); i++) {
             List<String> arr = List.of(comuniList.get(i).split(";"));
-            Provincia p = provinciaService.getByNome(arr.get(3));
+            Provincia p;
+            switch (arr.get(3)) {
+                case "Verbano-Cusio-Ossola" -> {
+                    p = provinciaService.getByNome("Verbania");
+                }
+                case "Valle d'Aosta/Vallée d'Aoste" -> {
+                    p = provinciaService.getByNome("Aosta");
+                }
+                case "Monza e della Brianza" -> {
+                    p = provinciaService.getByNome("Monza-Brianza");
+                }
+                case "Bolzano/Bozen" -> {
+                    p = provinciaService.getByNome("Bolzano");
+                }
+                case "La Spezia" -> {
+                    p = provinciaService.getByNome("La-Spezia");
+                }
+                case "Reggio nell'Emilia" -> {
+                    p = provinciaService.getByNome("Reggio-Emilia");
+                }
+                case "Forlì-Cesena" -> {
+                    p = provinciaService.getByNome("Forli-Cesena");
+                }
+                case "Pesaro e Urbino" -> {
+                    p = provinciaService.getByNome("Pesaro-Urbino");
+                }
+                case "Ascoli Piceno" -> {
+                    p = provinciaService.getByNome("Ascoli-Piceno");
+                }
+                case "Reggio Calabria" -> {
+                    p = provinciaService.getByNome("Reggio-Calabria");
+                }
+                case "Vibo Valentia" -> {
+                    p = provinciaService.getByNome("Vibo-Valentia");
+                }
+                case "Sud Sardegna" -> {
+                    p = provinciaService.getByNome("Carbonia Iglesias");
+                }
+                default -> {
+                    p = provinciaService.getByNome(arr.get(3));
+                }
+            }
+
             if (p != null) {
-                Comune c = Comune.builder().progressivoDelComune(Integer.parseInt(arr.get(1))).nome(arr.get(2)).provincia(p).build();
-                comuneService.save(c);
+                if (arr.get(1).equals("#RIF!")) {
+                    Comune c = Comune.builder().progressivoDelComune(cont).nome(arr.get(2)).provincia(p).build();
+                    cont++;
+                    comuneService.save(c);
+                } else {
+                    Comune c = Comune.builder().progressivoDelComune(Integer.parseInt(arr.get(1))).nome(arr.get(2)).provincia(p).build();
+                    comuneService.save(c);
+                }
+            } else {
+                System.out.println(arr.get(3));
             }
 
         }*/
