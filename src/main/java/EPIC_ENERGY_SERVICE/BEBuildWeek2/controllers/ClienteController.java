@@ -1,6 +1,19 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.controllers;
 
-/*@RestController
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Cliente;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.ErrorList;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.ClientePayload;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.services.ClienteService;
+
+@RestController
 @RequestMapping("/clienti")
 public class ClienteController {
 

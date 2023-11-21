@@ -16,3 +16,4 @@ public interface FatturaRepository extends JpaRepository<Fattura, Integer> {
 
     Optional<List<Fattura>> findByData(LocalDate date);
 }
+
