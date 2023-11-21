@@ -1,10 +1,6 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.services;
-<<<<<<<< HEAD:src/main/java/EPIC_ENERGY_SERVICE/BEBuildWeek2/services/UtenteService.java
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Utente;
-========
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.BadRequestException;
->>>>>>>> entities-clienti,-utenti,-fatture:src/main/java/EPIC_ENERGY_SERVICE/BEBuildWeek2/services/UtentiService.java
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.NotFoundException;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.UtentePayload;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.repositories.UtenteRepository;
@@ -29,17 +25,7 @@ public class UtenteService {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return utenteRepository.findAll(pageable);
     }
-<<<<<<<< HEAD:src/main/java/EPIC_ENERGY_SERVICE/BEBuildWeek2/services/UtenteService.java
-========
-    public Utente save(UtentePayload u) {
-        utenteRepository.findByEmailUtente(u.getEmail()).ifPresent(user -> {
-            throw new BadRequestException("L email " + user.getEmailUtente() + "è già in uso");
-        });
-        Utente newUtente = new Utente(u.getUsername(), u.getNome(),  u.getCognome(),
-                u.getEmail(), u.getPassword());
-        return utenteRepository.save(newUtente);
-    }
->>>>>>>> entities-clienti,-utenti,-fatture:src/main/java/EPIC_ENERGY_SERVICE/BEBuildWeek2/services/UtentiService.java
+
 
     public Utente findUtenteById(int id) throws NotFoundException { // throws NotFoundException {
         return utenteRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
