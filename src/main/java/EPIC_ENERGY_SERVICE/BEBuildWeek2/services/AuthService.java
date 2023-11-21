@@ -38,7 +38,7 @@ public class AuthService {
     public Utente saveUser(NewUserDTO body) throws IOException {
 
         utenteRepository.findByEmail(body.email()).ifPresent(user -> {
-            throw new BadRequestException("The email " + user.getEmail() + " has already been used!");
+            throw new BadRequestException("L'email " + user.getEmail() + " é giá stata utilizzata!");
         });
 
         Utente newUser = new Utente();

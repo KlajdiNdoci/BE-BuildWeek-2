@@ -45,7 +45,13 @@ public class ClienteController {
     public Cliente createCliente(@RequestBody @Validated ClientePayload body, BindingResult validation) {
         if (validation.hasErrors()) {
             throw new ErrorList(validation.getAllErrors());
-        } else return clienteService.save(body);
+        } else {
+            try {
+                return clienteService.save(body);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     @PutMapping("/upload_img")

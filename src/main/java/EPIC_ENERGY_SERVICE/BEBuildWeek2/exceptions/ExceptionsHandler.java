@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestControllerAdvice
 public class ExceptionsHandler {
-    @ExceptionHandler(BadRequestException.class)
+    @ExceptionHandler(BadRequestException.class )
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorsResponseWithListDTO handleBadRequest(BadRequestException e){
         if (e.getErrorList() != null){
@@ -63,5 +63,14 @@ public class ExceptionsHandler {
         }
         return new ErrorsResponseDTO(e.getMessage(), new Date());
     }
-
+    @ExceptionHandler(ErrorList.class )
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorsResponseWithListDTO handleBadRequestList(ErrorList e){
+        if (e.getErrorList() != null){
+            List<String> errorsList = e.getErrorList().stream().map(ObjectError::getDefaultMessage).toList();
+            return new ErrorsResponseWithListDTO (e.getMessage(), new Date(), errorsList);
+        } else {
+            return new ErrorsResponseWithListDTO (e.getMessage(), new Date(), new ArrayList<>());
+        }
+    }
 }

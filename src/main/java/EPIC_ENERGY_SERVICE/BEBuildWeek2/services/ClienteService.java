@@ -46,7 +46,7 @@ public class ClienteService {
     }
 
 
-    public Cliente save(ClientePayload cliente) {
+    public Cliente save(ClientePayload cliente) throws IOException {
         Indirizzo sl = null;
         Indirizzo so = null;
 
@@ -54,7 +54,7 @@ public class ClienteService {
             sl = indirizzoService.findById(Integer.parseInt(cliente.sedeLegale()));
         if (cliente.sedeOperativa() != null)
             so = indirizzoService.findById(Integer.parseInt(cliente.sedeOperativa()));
-        Cliente c = Cliente.builder().ragioneSociale(cliente.ragioneSociale()).partitaIva(cliente.partitaIva()).email(cliente.email()).fatturatoAnnuale(cliente.fatturatoAnnuale()).pec(cliente.pec()).telefeno(cliente.telefono()).emailContatto(cliente.emailContatto()).nomeContatto(cliente.nomeContatto()).cognomeContatto(cliente.cognomeContatto()).telefenoContatto(cliente.telefonoContatto()).indirizzoSedeLegale(sl).indirizzoSedeOperativa(so).build();
+        Cliente c = Cliente.builder().ragioneSociale(cliente.ragioneSociale()).partitaIva(cliente.partitaIva()).email(cliente.email()).fatturatoAnnuale(cliente.fatturatoAnnuale()).pec(cliente.pec()).telefeno(cliente.telefono()).emailContatto(cliente.emailContatto()).nomeContatto(cliente.nomeContatto()).cognomeContatto(cliente.cognomeContatto()).telefenoContatto(cliente.telefonoContatto()).indirizzoSedeLegale(sl).dataUltimoContatto(cliente.dataUltimoContatto()).tipoCliente(cliente.tipoCliente()).indirizzoSedeOperativa(so).build();
         return clienteRepository.save(c);
     }
 

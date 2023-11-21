@@ -35,7 +35,7 @@ public record ClientePayload(
         String sedeLegale,
         String sedeOperativa,
 
-        @NotEmpty(message = "Il campo data ultimo contatto non può essere vuoto")
+        @NotNull(message = "Il campo data ultimo contatto non può essere vuoto")
         LocalDate dataUltimoContatto
 ) {
 }
