@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Service
@@ -111,6 +112,11 @@ public class ClienteService {
     public Page<Cliente> findByFatturatoAnnuale(int page, int size, String order, double fatturatoAnnuale) {
         Pageable pagina = PageRequest.of(page, size, Sort.by(order));
         return clienteRepository.findByFatturatoAnnuale(pagina, fatturatoAnnuale);
+    }
+
+    public Page<List<Cliente>> findByNomeContattoStartingWithIgnoreCase(int page, int size, String order, String nome) {
+        Pageable pagina = PageRequest.of(page, size, Sort.by(order));
+        return clienteRepository.findByNomeContattoStartingWithIgnoreCase(pagina, nome);
     }
 
 
