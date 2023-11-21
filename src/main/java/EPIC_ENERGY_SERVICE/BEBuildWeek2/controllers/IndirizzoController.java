@@ -2,7 +2,7 @@ package EPIC_ENERGY_SERVICE.BEBuildWeek2.controllers;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Indirizzo;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.NuovoIndirizzoDTO;
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.service.IndirizzoService;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.services.IndirizzoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;

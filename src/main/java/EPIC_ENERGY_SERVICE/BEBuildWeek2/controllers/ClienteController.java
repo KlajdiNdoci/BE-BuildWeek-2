@@ -11,7 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import service.ClienteService;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.services.ClienteService;
 
 @RestController
 @RequestMapping("/clienti")

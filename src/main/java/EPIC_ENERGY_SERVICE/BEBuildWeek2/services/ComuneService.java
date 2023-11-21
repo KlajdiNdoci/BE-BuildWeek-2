@@ -1,4 +1,4 @@
-package EPIC_ENERGY_SERVICE.BEBuildWeek2.service;
+package EPIC_ENERGY_SERVICE.BEBuildWeek2.services;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Comune;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.NotFoundException;

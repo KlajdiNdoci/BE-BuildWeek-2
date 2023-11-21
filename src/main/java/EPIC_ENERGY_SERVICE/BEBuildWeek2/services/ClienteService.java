@@ -1,4 +1,4 @@
-package service;
+package EPIC_ENERGY_SERVICE.BEBuildWeek2.services;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Cliente;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;

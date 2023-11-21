@@ -1,8 +1,8 @@
-package service;
+package EPIC_ENERGY_SERVICE.BEBuildWeek2.services;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Fattura;
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Utente;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.FatturaPayload;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.repositories.FatturaRepository;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.services.ClienteService;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.utils.StatoFattura;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

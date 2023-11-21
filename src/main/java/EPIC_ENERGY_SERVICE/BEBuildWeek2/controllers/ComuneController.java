@@ -2,7 +2,7 @@ package EPIC_ENERGY_SERVICE.BEBuildWeek2.controllers;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Comune;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.NuovoComuneDTO;
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.service.ComuneService;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.services.ComuneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
