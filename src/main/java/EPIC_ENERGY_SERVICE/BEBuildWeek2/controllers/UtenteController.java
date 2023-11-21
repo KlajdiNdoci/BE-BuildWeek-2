@@ -2,7 +2,7 @@ package EPIC_ENERGY_SERVICE.BEBuildWeek2.controllers;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Utente;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.BadRequestException;
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.UtentePayload;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.NewUserDTO;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.services.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -43,7 +43,7 @@ public class UtenteController {
 
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public Utente findByIdAndUpdate(@PathVariable int id, @RequestBody @Validated UtentePayload body, BindingResult validation) {
+    public Utente findByIdAndUpdate(@PathVariable int id, @RequestBody @Validated NewUserDTO body, BindingResult validation) {
         if (validation.hasErrors()) {
             throw new BadRequestException(validation.getAllErrors());
         } else {
@@ -58,7 +58,7 @@ public class UtenteController {
     }
 
     @PutMapping("/me")
-    public UserDetails updateProfile(@AuthenticationPrincipal Utente currentUser, @RequestBody UtentePayload body) {
+    public UserDetails updateProfile(@AuthenticationPrincipal Utente currentUser, @RequestBody NewUserDTO body) {
         return utenteService.findByIdAndUpdate(currentUser.getId(), body);
     }
 

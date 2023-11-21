@@ -11,10 +11,10 @@ public record NewUserDTO(
         String username,
         @NotEmpty(message = "Il campo nome non può essere vuoto")
         @Size(min = 3, max = 20, message = "The name must have between 3 and 20 characters")
-        String name,
+        String nome,
         @NotEmpty(message = "Il campo cognome non può essere vuoto")
         @Size(min = 3, max = 20, message = "The surname must have between 3 and 20 characters")
-        String surname,
+        String cognome,
 
         @NotEmpty(message = "Il campo email non può essere vuoto")
         @Pattern(regexp = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$", message = "L'email non é valida")

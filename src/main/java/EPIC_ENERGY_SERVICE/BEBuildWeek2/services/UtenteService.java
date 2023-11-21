@@ -2,7 +2,7 @@ package EPIC_ENERGY_SERVICE.BEBuildWeek2.services;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Utente;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.NotFoundException;
-import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.UtentePayload;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.NewUserDTO;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.repositories.UtenteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,12 +27,11 @@ public class UtenteService {
     }
 
 
-    public Utente findUtenteById(int id) throws NotFoundException { // throws NotFoundException {
+    public Utente findUtenteById(int id) throws NotFoundException {
         return utenteRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
-
     }
 
-    public Utente findByIdAndUpdate(int id, UtentePayload u) throws NotFoundException {
+    public Utente findByIdAndUpdate(int id, NewUserDTO u) throws NotFoundException {
         Utente foundUser = this.findUtenteById(id);
         foundUser.setId(id);
         foundUser.setUsername(u.username());
