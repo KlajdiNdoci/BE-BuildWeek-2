@@ -52,7 +52,7 @@ public class FatturaController {
         if (validation.hasErrors()){
             throw new BadRequestException(validation.getAllErrors());
         }else {
-            return fatturaService.findByIdAndUpdate(id, body);
+            return fatturaService.findByIdAndUpdate(body, id);
         }
     }
 }

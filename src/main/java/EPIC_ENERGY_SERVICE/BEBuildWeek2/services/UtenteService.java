@@ -35,10 +35,10 @@ public class UtenteService {
     public Utente findByIdAndUpdate(int id, UtentePayload u) throws NotFoundException {
         Utente foundUser = this.findUtenteById(id);
         foundUser.setId(id);
-        foundUser.setUsername(u.getUsername());
-        foundUser.setNome(u.getNome());
-        foundUser.setCognome(u.getCognome());
-        foundUser.setEmail(u.getEmail());
+        foundUser.setUsername(u.username());
+        foundUser.setNome(u.nome());
+        foundUser.setCognome(u.cognome());
+        foundUser.setEmail(u.email());
         return utenteRepository.save(foundUser);
     }
 
