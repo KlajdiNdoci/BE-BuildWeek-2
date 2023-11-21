@@ -34,8 +34,8 @@ public class FatturaService {
 
     public Fattura save(FatturaPayload f) {
         Fattura newFattura = new Fattura();
-        newFattura.setImporto(f.getImporto());
-        newFattura.setData(f.getData());
+        newFattura.setImporto(f.importo());
+        newFattura.setData(f.data());
         return fatturaRepository.save(newFattura);
     }
 
@@ -50,12 +50,12 @@ public class FatturaService {
     }
 
 
-    public Fattura findByIdAndUpdate(int id, int numeroFattura, int anno, LocalDate data, int importo, StatoFattura statoFattura) {
+    public Fattura findByIdAndUpdate(FatturaPayload body, int id) {
         Fattura fattura = getById(id);
-        fattura.setNumeroFattura(numeroFattura);
-        fattura.setData(data);
-        fattura.setImporto(importo);
-        fattura.setStatoFattura(statoFattura);
+        fattura.setNumeroFattura(body.numeroFattura());
+        fattura.setData(body.data());
+        fattura.setImporto(body.importo());
+        fattura.setStatoFattura(body.statoFattura());
         return fatturaRepository.save(fattura);
     }
 
