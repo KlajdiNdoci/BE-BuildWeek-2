@@ -54,7 +54,7 @@ public class ClienteService {
             sl = indirizzoService.findById(Integer.parseInt(cliente.sedeLegale()));
         if (cliente.sedeOperativa() != null)
             so = indirizzoService.findById(Integer.parseInt(cliente.sedeOperativa()));
-        Cliente c = Cliente.builder().ragioneSociale(cliente.ragioneSociale()).partitaIva(cliente.partitaIva()).email(cliente.email()).fatturatoAnnuale(cliente.fatturatoAnnuale()).pec(cliente.pec()).telefeno(cliente.telefono()).emailContatto(cliente.emailContatto()).nomeContatto(cliente.nomeContatto()).cognomeContatto(cliente.cognomeContatto()).telefenoContatto(cliente.telefonoContatto()).indirizzoSedeLegale(sl).dataUltimoContatto(cliente.dataUltimoContatto()).tipoCliente(cliente.tipoCliente()).indirizzoSedeOperativa(so).build();
+        Cliente c = Cliente.builder().ragioneSociale(cliente.ragioneSociale()).partitaIva(cliente.partitaIva()).email(cliente.email()).fatturatoAnnuale(cliente.fatturatoAnnuale()).pec(cliente.pec()).telefono(cliente.telefono()).emailContatto(cliente.emailContatto()).nomeContatto(cliente.nomeContatto()).cognomeContatto(cliente.cognomeContatto()).telefonoContatto(cliente.telefonoContatto()).indirizzoSedeLegale(sl).dataUltimoContatto(cliente.dataUltimoContatto()).tipoCliente(cliente.tipoCliente()).indirizzoSedeOperativa(so).build();
         return clienteRepository.save(c);
     }
 
@@ -74,8 +74,8 @@ public class ClienteService {
         cliente.setDataUltimoContatto(updatedCliente.dataUltimoContatto() == null ? cliente.getDataUltimoContatto() : updatedCliente.dataUltimoContatto());
         cliente.setFatturatoAnnuale(updatedCliente.fatturatoAnnuale());
         cliente.setPec(updatedCliente.pec().isEmpty() ? cliente.getPec() : updatedCliente.pec());
-        cliente.setTelefeno(updatedCliente.telefono().isEmpty() ? cliente.getTelefeno() : updatedCliente.telefono());
-        cliente.setTelefenoContatto(updatedCliente.telefonoContatto().isEmpty() ? cliente.getTelefenoContatto() : updatedCliente.telefonoContatto());
+        cliente.setTelefono(updatedCliente.telefono().isEmpty() ? cliente.getTelefono() : updatedCliente.telefono());
+        cliente.setTelefonoContatto(updatedCliente.telefonoContatto().isEmpty() ? cliente.getTelefonoContatto() : updatedCliente.telefonoContatto());
         cliente.setIndirizzoSedeLegale(sl == null ? cliente.getIndirizzoSedeLegale() : sl);
         cliente.setIndirizzoSedeOperativa(so == null ? cliente.getIndirizzoSedeOperativa() : so);
         return clienteRepository.save(cliente);
