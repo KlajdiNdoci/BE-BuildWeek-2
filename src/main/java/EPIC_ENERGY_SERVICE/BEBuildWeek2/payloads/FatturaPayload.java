@@ -13,7 +13,9 @@ public record FatturaPayload(
         @NotNull(message = "Il campo numero fattura non può essere vuoto")
         int numeroFattura,
         @NotEmpty(message = "Il campo stato fattura non può essere vuoto")
-        String statoFattura
+        String statoFattura,
+        @NotNull(message = "Il cliente non può essere null")
+        int id_cliente
 ) {
 
 
