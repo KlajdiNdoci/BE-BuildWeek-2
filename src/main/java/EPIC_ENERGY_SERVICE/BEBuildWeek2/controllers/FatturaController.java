@@ -70,14 +70,35 @@ public class FatturaController {
                                      @RequestParam(required = false) String imp1,
                                      @RequestParam(required = false) String imp2) {
 
-        if (id_cliente != null)
-            return fatturaService.findByIdCliente(page, size > 20 ? 5 : size, orderBy, Integer.parseInt(id_cliente));
+        if (id_cliente != null) {
+            try {
+                return fatturaService.findByIdCliente(page, size > 20 ? 5 : size, orderBy, Integer.parseInt(id_cliente));
+            } catch (NumberFormatException e) {
+                throw new BadRequestException("Inserisci valori validi");
+            }
+        }
+
         if (statoFattura != null)
             return fatturaService.findByStatoFattura(page, size > 20 ? 5 : size, orderBy, statoFattura);
-        if (data != null) return fatturaService.findByData(page, size > 20 ? 5 : size, orderBy, data);
-        if (year != null) return fatturaService.findByYear(page, size > 20 ? 5 : size, orderBy, Integer.parseInt(year));
-        if (imp1 != null && imp2 != null)
-            return fatturaService.findByImporto(page, size > 20 ? 5 : size, orderBy, Double.parseDouble(imp1), Double.parseDouble(imp2));
+        if (data != null)
+            return fatturaService.findByData(page, size > 20 ? 5 : size, orderBy, data);
+        if (year != null) {
+            try {
+                return fatturaService.findByYear(page, size > 20 ? 5 : size, orderBy, Integer.parseInt(year));
+            } catch (NumberFormatException e) {
+                throw new BadRequestException("Inserisci valori validi");
+            }
+
+        }
+
+        if (imp1 != null && imp2 != null) {
+            try {
+                return fatturaService.findByImporto(page, size > 20 ? 5 : size, orderBy, Double.parseDouble(imp1), Double.parseDouble(imp2));
+            } catch (NumberFormatException e) {
+                throw new BadRequestException("Inserisci valori validi");
+            }
+        }
+
 
         throw new BadRequestException("Inserisci i parametri corretti");
     }
