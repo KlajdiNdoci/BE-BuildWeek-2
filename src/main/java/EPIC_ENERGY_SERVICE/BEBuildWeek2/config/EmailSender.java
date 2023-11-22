@@ -1,6 +1,17 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.config;
 
-/*§@Component
+import com.sendgrid.Method;
+import com.sendgrid.Request;
+import com.sendgrid.SendGrid;
+import com.sendgrid.helpers.mail.Mail;
+import com.sendgrid.helpers.mail.objects.Content;
+import com.sendgrid.helpers.mail.objects.Email;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+
+@Component
 public class EmailSender {
     private final String apikey;
     private final String sender;
@@ -25,5 +36,5 @@ public class EmailSender {
         request.setBody(mail.build());
         sg.api(request);
     }
-}*/
+}
 
