@@ -22,7 +22,7 @@ public class Comune {
     @JsonIgnore
     @OneToMany(mappedBy = "comune")
     private List<Indirizzo> indirizzi;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "provincia_id", nullable = false)
     private Provincia provincia;
 }

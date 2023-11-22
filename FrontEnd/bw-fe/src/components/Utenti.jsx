@@ -42,6 +42,7 @@ const Utenti = () => {
               <li
                 style={{ cursor: "pointer" }}
                 onClick={() => {
+                  setPagina(1);
                   setOrdine("nomeContatto");
                   getUtenti("nomeContatto", 1);
                 }}
@@ -51,20 +52,42 @@ const Utenti = () => {
               <li
                 style={{ cursor: "pointer" }}
                 onClick={() => {
+                  setPagina(1);
                   setOrdine("fatturatoAnnuale");
                   getUtenti("fatturatoAnnuale", 1);
                 }}
               >
                 Fatturato
               </li>
-              <li style={{ cursor: "pointer" }} onClick={() => {}}>
+              <li
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setPagina(1);
+                  setOrdine("dataInserimento");
+                  getUtenti("dataInserimento", 1);
+                }}
+              >
                 Data di inserimento
               </li>
-              <li style={{ cursor: "pointer" }} onClick={() => {}}>
+              <li
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setPagina(1);
+                  setOrdine("dataUltimoContatto");
+                  getUtenti("dataUltimoContatto", 1);
+                }}
+              >
                 Data di ultimo contatto
               </li>
-              <li style={{ cursor: "pointer" }} onClick={() => {}}>
-                Data provincia sede legale
+              <li
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setPagina(1);
+                  setOrdine("dataUltimoContatto");
+                  getUtenti("dataUltimoContatto", 1);
+                }}
+              >
+                Provincia sede legale
               </li>
             </ul>
           </Col>
