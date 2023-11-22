@@ -13,6 +13,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/utenti")
@@ -66,5 +69,25 @@ public class UtenteController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteProfile(@AuthenticationPrincipal Utente currentUser) {
         utenteService.findByIdAndDelete(currentUser.getId());
+    }
+
+    @PutMapping("/{id}/upload")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public Utente upload(@RequestParam("avatar") MultipartFile body, @PathVariable int id) throws IOException {
+        try {
+            return utenteService.uploadImg(body, id);
+        }catch (Exception e){
+            throw new BadRequestException(e.getMessage());
+        }
+    }
+
+    @PutMapping("/me/upload")
+    public UserDetails uploadOnProfile(@AuthenticationPrincipal Utente currentUser,  @RequestParam("avatar") MultipartFile body) throws IOException {
+        try {
+
+            return utenteService.uploadImg(body, currentUser.getId());
+        }catch (Exception e){
+            throw new BadRequestException(e.getMessage());
+        }
     }
 }
