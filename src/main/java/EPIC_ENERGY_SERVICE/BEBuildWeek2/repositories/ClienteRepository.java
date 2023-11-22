@@ -8,13 +8,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
-    Optional<List<Cliente>> findByDataUltimoContatto(LocalDate data);
+    Page<Cliente> findByDataInserimento(LocalDate data);
 
     Page<Cliente> findByDataInserimento(Pageable pageable, LocalDate date);
 
@@ -27,6 +25,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     @Query("select c from Cliente c order by c.indirizzoSedeLegale.comune.provincia.nome ")
     Page<Cliente> findByIndirizzoSedeLegaleComuneProvinciaOrderByNome(Pageable p);
 
-    Page<List<Cliente>> findByNomeContattoStartingWithIgnoreCase(Pageable pageable, String nome);
+    Page<Cliente> findByNomeContattoStartingWithIgnoreCase(Pageable pageable, String nome);
+
 
 }

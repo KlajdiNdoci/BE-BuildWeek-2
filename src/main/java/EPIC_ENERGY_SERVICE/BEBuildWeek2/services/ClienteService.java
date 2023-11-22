@@ -18,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.List;
 
 
 @Service
@@ -109,13 +108,18 @@ public class ClienteService {
         return clienteRepository.findByDataUltimoContatto(pagina, dataUltimoContatto);
     }
 
+    public Page<Cliente> findByDataInserimento(int page, int size, String order, LocalDate dataInserimento) {
+        Pageable pagina = PageRequest.of(page, size, Sort.by(order));
+        return clienteRepository.findByDataInserimento(pagina, dataInserimento);
+    }
+
 
     public Page<Cliente> findByFatturatoAnnuale(int page, int size, String order, double fatturatoAnnuale) {
         Pageable pagina = PageRequest.of(page, size, Sort.by(order));
         return clienteRepository.findByFatturatoAnnuale(pagina, fatturatoAnnuale);
     }
 
-    public Page<List<Cliente>> findByNomeContattoStartingWithIgnoreCase(int page, int size, String order, String nome) {
+    public Page<Cliente> findByNomeContattoStartingWithIgnoreCase(int page, int size, String order, String nome) {
         Pageable pagina = PageRequest.of(page, size, Sort.by(order));
         return clienteRepository.findByNomeContattoStartingWithIgnoreCase(pagina, nome);
     }
@@ -162,4 +166,5 @@ public class ClienteService {
         Pageable p = PageRequest.of(page, i, Sort.by(order));
         return clienteRepository.findByIndirizzoSedeLegaleComuneProvinciaOrderByNome(p);
     }
+
 }
