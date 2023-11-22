@@ -3,6 +3,7 @@ package EPIC_ENERGY_SERVICE.BEBuildWeek2.controllers;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Cliente;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.ErrorList;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.ClientePayload;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.ClientePayloadModificaIndirizzo;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,18 @@ public class ClienteController {
     @GetMapping()
     public Page<Cliente> getAllClienti(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam(defaultValue = "id") String order) {
         return clienteService.getAllClienti(page, size > 20 ? 5 : size, order);
+
+    }
+
+    @GetMapping("/get_all_by_provincia")
+    public Page<Cliente> getAllByProvincia(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam(defaultValue = "id") String order, @RequestParam String prov) {
+        return clienteService.getAllByProvincia(page, size > 20 ? 5 : size, order, prov);
+
+    }
+
+    @GetMapping("/get_all_order_by_provincia")
+    public Page<Cliente> getAllOrderByProvincia(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam(defaultValue = "id") String order) {
+        return clienteService.findByIndirizzoSedeLegaleComuneProvinciaOrderByNome(page, size > 20 ? 5 : size, order);
 
     }
 
@@ -53,6 +66,15 @@ public class ClienteController {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
+        }
+    }
+
+    @PutMapping("/modifica_indirizzi/{id}")
+    public Cliente modifyCliente(@RequestBody @Validated ClientePayloadModificaIndirizzo body, BindingResult validation, @PathVariable int id) {
+        if (validation.hasErrors()) {
+            throw new ErrorList(validation.getAllErrors());
+        } else {
+            return clienteService.modifyCliente(body, id);
         }
     }
 

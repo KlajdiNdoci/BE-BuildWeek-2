@@ -42,12 +42,12 @@ public class Cliente {
     private String logoAziendale;
     @Enumerated(EnumType.STRING)
     private TipoCliente tipoCliente;
-    
+
     @JsonIgnore
     @OneToMany(mappedBy = "idCliente")
     private List<Fattura> fatture;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "indirizzoLegale_id")
     private Indirizzo indirizzoSedeLegale;
 

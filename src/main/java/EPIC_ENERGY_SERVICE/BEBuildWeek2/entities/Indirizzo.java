@@ -18,7 +18,7 @@ public class Indirizzo {
     private String civico;
     private String località;
     private int cap;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "comune_id", nullable = false)
     private Comune comune;
 }

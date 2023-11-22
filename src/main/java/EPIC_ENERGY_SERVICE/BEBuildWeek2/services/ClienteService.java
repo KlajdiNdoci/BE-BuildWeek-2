@@ -4,6 +4,7 @@ import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Cliente;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Indirizzo;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.NotFoundException;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.ClientePayload;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.ClientePayloadModificaIndirizzo;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.repositories.ClienteRepository;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
@@ -46,7 +47,7 @@ public class ClienteService {
 
 
     public Cliente getById(int idCliente) {
-        return clienteRepository.findById(idCliente).orElseThrow(()-> new NotFoundException(idCliente));
+        return clienteRepository.findById(idCliente).orElseThrow(() -> new NotFoundException(idCliente));
     }
 
 
@@ -121,7 +122,7 @@ public class ClienteService {
 
 
     public Cliente uploadImg(MultipartFile file, int id) throws IOException {
-        Cliente c = clienteRepository.findById(id).orElseThrow(()-> new NotFoundException(id));
+        Cliente c = clienteRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         String url = (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
         c.setLogoAziendale(url);
         clienteRepository.save(c);
@@ -132,5 +133,33 @@ public class ClienteService {
         Cliente c = getById(id);
         cloudinaryService.deleteImageByUrl(c.getLogoAziendale());
         clienteRepository.delete(c);
+    }
+
+    public Page<Cliente> getAllByProvincia(int page, int i, String order, String prov) {
+        Pageable p = PageRequest.of(page, i, Sort.by("id"));
+        return clienteRepository.findByIndirizzoSedeLegaleComuneProvinciaNome(p, prov);
+    }
+
+    public Cliente modifyCliente(ClientePayloadModificaIndirizzo body, int id) {
+        Cliente c = getById(id);
+        Indirizzo so;
+        Indirizzo sl;
+        if (body.sedeOperativa() == null)
+            so = null;
+        else
+            so = indirizzoService.findById(Integer.parseInt(body.sedeOperativa()));
+        if (body.sedeLegale() == null) sl = null;
+        else sl = indirizzoService.findById(Integer.parseInt(body.sedeLegale()));
+
+        c.setIndirizzoSedeOperativa(so != null ? so : c.getIndirizzoSedeOperativa());
+        c.setIndirizzoSedeLegale(sl != null ? sl : c.getIndirizzoSedeLegale());
+
+        return clienteRepository.save(c);
+
+    }
+
+    public Page<Cliente> findByIndirizzoSedeLegaleComuneProvinciaOrderByNome(int page, int i, String order) {
+        Pageable p = PageRequest.of(page, i, Sort.by(order));
+        return clienteRepository.findByIndirizzoSedeLegaleComuneProvinciaOrderByNome(p);
     }
 }
