@@ -57,10 +57,10 @@ public class ClienteController {
     public Page<Cliente> getByFilter(@RequestParam(defaultValue = "0") int page,
                                      @RequestParam(defaultValue = "5") int size,
                                      @RequestParam(defaultValue = "id") String order,
-                                     @RequestParam(name = "parametro1", required = false) String nome,
-                                     @RequestParam(name = "parametro2", required = false) LocalDate dataInserimento,
-                                     @RequestParam(name = "parametro3", required = false) Double fatturatoAnnuale,
-                                     @RequestParam(name = "parametro4", required = false) LocalDate dataUltimoContatto) {
+                                     @RequestParam(required = false) String nome,
+                                     @RequestParam(required = false) LocalDate dataInserimento,
+                                     @RequestParam(required = false) Double fatturatoAnnuale,
+                                     @RequestParam(required = false) LocalDate dataUltimoContatto) {
         if (nome != null) {
             return clienteService.findByNomeContattoStartingWithIgnoreCase(page, size > 20 ? 5 : size, order, nome);
         } else if (dataInserimento != null) {

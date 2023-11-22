@@ -12,8 +12,6 @@ import java.time.LocalDate;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
-    Page<Cliente> findByDataInserimento(LocalDate data);
-
     Page<Cliente> findByDataInserimento(Pageable pageable, LocalDate date);
 
     Page<Cliente> findByDataUltimoContatto(Pageable pageable, LocalDate date);
