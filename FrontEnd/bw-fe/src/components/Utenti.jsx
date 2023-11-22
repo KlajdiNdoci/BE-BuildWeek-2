@@ -9,6 +9,7 @@ const Utenti = () => {
   const [numPagine, setNumPagine] = useState();
   const [ordine, setOrdine] = useState();
   const [show, setShow] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
   const [search, setSearch] = useState();
   const getUtenti = async (order, p) => {
     const aut = JSON.parse(localStorage.getItem("token"));
@@ -34,7 +35,7 @@ const Utenti = () => {
     }
   };
 
-  const getByprovincia = async (page) => {
+  const getByprovincia = async page => {
     const aut = JSON.parse(localStorage.getItem("token"));
     try {
       const risp = await fetch(`http://localhost:3001/clienti/get_all_order_by_provincia?page=${page - 1}`, {
@@ -55,12 +56,38 @@ const Utenti = () => {
       console.log(error);
     }
   };
-  const handleShow = (page) => setShow(true);
-  const handleClose = (page) => setShow(false);
-  const findAllByProvincia = async (page) => {
+  const handleShow = page => setShow(true);
+  const handleClose = page => setShow(false);
+  const findAllByProvincia = async page => {
     const aut = JSON.parse(localStorage.getItem("token"));
     try {
       const risp = await fetch(`http://localhost:3001/clienti/get_all_by_provincia?page=${page - 1}&prov=${search}`, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${aut.accessToken}`,
+        },
+      });
+      if (risp.ok) {
+        const data = await risp.json();
+        console.log(data);
+        setNumPagine(data.totalPages);
+        setSearch("");
+        console.log(data.content);
+        setListaUtenti(data.content);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleShowFilter = page => setShowFilter(true);
+  const handleCloseFilter = page => setShowFilter(false);
+  const [filter, setFilter] = useState();
+  const filterClienti = async page => {
+    const aut = JSON.parse(localStorage.getItem("token"));
+    try {
+      const risp = await fetch(`http://localhost:3001/clienti/filter?page=${page - 1}&${filter}=${search}`, {
         method: "GET",
         headers: {
           "content-type": "application/json",
@@ -139,6 +166,42 @@ const Utenti = () => {
               <li style={{ cursor: "pointer" }} onClick={handleShow}>
                 cerca provincia
               </li>
+              <li
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setFilter("fatturatoAnnuale");
+                  handleShowFilter();
+                }}
+              >
+                Filtra per fatturato annuale
+              </li>
+              <li
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setFilter("dataInserimento");
+                  handleShowFilter();
+                }}
+              >
+                Filtra per data di inserimento
+              </li>
+              <li
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setFilter("dataUltimoContatto");
+                  handleShowFilter();
+                }}
+              >
+                Filtra per data di ultimo contatto
+              </li>
+              <li
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setFilter("nome");
+                  handleShowFilter();
+                }}
+              >
+                Filtra per parte del nome
+              </li>
             </ul>
           </Col>
           <Col xs={8} className="d-flex flex-column justify-content-center align-items-center">
@@ -182,7 +245,7 @@ const Utenti = () => {
         </Modal.Header>
         <Modal.Body>
           <Form
-            onSubmit={(e) => {
+            onSubmit={e => {
               e.preventDefault();
               findAllByProvincia(1);
             }}
@@ -194,7 +257,7 @@ const Utenti = () => {
                 placeholder="provincia"
                 autoFocus
                 value={search}
-                onChange={(e) => {
+                onChange={e => {
                   setSearch(e.target.value);
                 }}
               />
@@ -215,6 +278,54 @@ const Utenti = () => {
                 variant="primary"
                 onClick={() => {
                   handleClose();
+                }}
+                className="ms-3"
+              >
+                Search
+              </Button>
+            </Modal.Footer>
+          </Form>
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={showFilter} onHide={handleCloseFilter}>
+        <Modal.Header closeButton>
+          <Modal.Title>CIAO</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form
+            onSubmit={e => {
+              e.preventDefault();
+              filterClienti(1);
+            }}
+          >
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Filtra</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="filtra"
+                autoFocus
+                value={search}
+                onChange={e => {
+                  setSearch(e.target.value);
+                }}
+              />
+            </Form.Group>
+            <Modal.Footer>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  handleCloseFilter();
+                  setSearch("");
+                }}
+              >
+                Close
+              </Button>
+              <Button
+                type="submit"
+                variant="primary"
+                onClick={() => {
+                  handleCloseFilter();
                 }}
                 className="ms-3"
               >
