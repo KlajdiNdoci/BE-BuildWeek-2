@@ -26,6 +26,9 @@ public class UtenteService {
     @Autowired
     private Cloudinary cloudinary;
 
+    @Autowired
+    private CloudinaryService cloudinaryService;
+
     public Page<Utente> findAll(int page, int size, String sortBy) {
         if (size < 0)
             size = 10;
@@ -52,6 +55,9 @@ public class UtenteService {
 
     public void findByIdAndDelete(int id) throws NotFoundException {
         Utente foundUtente = this.findUtenteById(id);
+        if (!foundUtente.getAvatar().equals("https://ui-avatars.com/api/?name=" + foundUtente.getNome() + "+" + foundUtente.getCognome())) {
+            cloudinaryService.deleteImageByUrl(foundUtente.getAvatar());
+        }
         utenteRepository.delete(foundUtente);
     }
 
@@ -66,6 +72,9 @@ public class UtenteService {
     public Utente uploadImg(MultipartFile file, int id) throws IOException {
         Utente u = utenteRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         String url = (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+        if (!u.getAvatar().equals("https://ui-avatars.com/api/?name=" + u.getNome() + "+" + u.getCognome())) {
+            cloudinaryService.deleteImageByUrl(u.getAvatar());
+        }
         u.setAvatar(url);
         utenteRepository.save(u);
         return u;

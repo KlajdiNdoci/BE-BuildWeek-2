@@ -128,6 +128,9 @@ public class ClienteService {
     public Cliente uploadImg(MultipartFile file, int id) throws IOException {
         Cliente c = clienteRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
         String url = (String) cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap()).get("url");
+        if (c.getLogoAziendale() != null) {
+            cloudinaryService.deleteImageByUrl(c.getLogoAziendale());
+        }
         c.setLogoAziendale(url);
         clienteRepository.save(c);
         return c;

@@ -71,11 +71,21 @@ public class UtenteController {
         utenteService.findByIdAndDelete(currentUser.getId());
     }
 
-    @PostMapping("/{id}/upload")
+    @PutMapping("/{id}/upload")
     @PreAuthorize("hasAuthority('ADMIN')")
     public Utente upload(@RequestParam("avatar") MultipartFile body, @PathVariable int id) throws IOException {
         try {
             return utenteService.uploadImg(body, id);
+        }catch (Exception e){
+            throw new BadRequestException(e.getMessage());
+        }
+    }
+
+    @PutMapping("/me/upload")
+    public UserDetails uploadOnProfile(@AuthenticationPrincipal Utente currentUser,  @RequestParam("avatar") MultipartFile body) throws IOException {
+        try {
+
+            return utenteService.uploadImg(body, currentUser.getId());
         }catch (Exception e){
             throw new BadRequestException(e.getMessage());
         }
