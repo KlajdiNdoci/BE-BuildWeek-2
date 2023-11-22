@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Utenti from "./components/Utenti";
 import Home from "./components/Home";
 import TopBar from "./components/TopBar";
+import Fatture from "./components/Fatture";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/utenti" element={<Utenti />} />
+          <Route path="/fatture" element={<Fatture />} />
         </Routes>
       </BrowserRouter>
     </>

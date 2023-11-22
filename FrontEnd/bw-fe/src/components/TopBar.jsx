@@ -21,6 +21,9 @@ const TopBar = () => {
             <Link to={"/utenti"} className={loc.pathname === "/utenti" && "selected"}>
               Utenti
             </Link>
+            <Link to={"/fatture"} className={loc.pathname === "/fatture" && "selected"}>
+              Fatture
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
