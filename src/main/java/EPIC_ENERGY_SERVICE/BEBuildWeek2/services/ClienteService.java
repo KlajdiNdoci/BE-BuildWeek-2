@@ -138,7 +138,7 @@ public class ClienteService {
 
     public Page<Cliente> getAllByProvincia(int page, int i, String order, String prov) {
         Pageable p = PageRequest.of(page, i, Sort.by("id"));
-        return clienteRepository.findByIndirizzoSedeLegaleComuneProvinciaNome(p, prov);
+        return clienteRepository.findByIndirizzoSedeLegaleComuneProvinciaNomeIgnoreCase(p, prov);
     }
 
     public Cliente modifyCliente(ClientePayloadModificaIndirizzo body, int id) {
