@@ -26,7 +26,10 @@ public class EmailSender {
         Email from = new Email(sender);
         String subject = "Registrazione avvenuta con successo!";
         Email to = new Email(recipient);
-        Content content = new Content("text/plain", "and easy to do anywhere, even with Java");
+        Content content = new Content("text/html",
+                "<p>Benvenuto su EPIC ENERGY SERVICES</p>" +
+                        "<p><a href=\"http://localhost:3000/utenti\"><button style=\"padding:10px; background-color:blue; color:white; text-decoration:none; border:none; border-radius:5px; cursor:pointer;\">Clicca qui</button></a></p>"
+        );
         Mail mail = new Mail(from, subject, to, content);
 
         SendGrid sg = new SendGrid(apikey);

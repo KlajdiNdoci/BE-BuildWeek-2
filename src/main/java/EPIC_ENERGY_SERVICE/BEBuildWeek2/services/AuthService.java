@@ -1,5 +1,6 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.services;
 
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.config.EmailSender;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Utente;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.BadRequestException;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.UnauthorizedException;
@@ -24,6 +25,8 @@ public class AuthService {
     private UtenteService utenteService;
     @Autowired
     private JWTTools jwtTools;
+    @Autowired
+    EmailSender emailSender;
 
     public String authenticateUser(UtenteLoginDTO body) {
         Utente user = utenteService.findUtenteByEmail(body.email());
@@ -43,12 +46,14 @@ public class AuthService {
 
         Utente newUser = new Utente();
         newUser.setUsername(body.username());
-
         newUser.setNome(body.nome());
         newUser.setCognome(body.cognome());
         newUser.setRuolo(TipoUtente.USER);
         newUser.setEmail(body.email());
         newUser.setPassword(bcrypt.encode(body.password()));
-        return utenteRepository.save(newUser);
+        Utente savedUser = utenteRepository.save(newUser);
+        emailSender.sendRegistrationEmail(body.email());
+
+        return savedUser;
     }
 }
