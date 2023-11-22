@@ -32,6 +32,28 @@ const Utenti = () => {
     }
   };
 
+  const getByprovincia = async (page) => {
+    const aut = JSON.parse(localStorage.getItem("token"));
+    try {
+      const risp = await fetch(`http://localhost:3001/clienti/get_all_order_by_provincia?page=${page - 1}`, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${aut.accessToken}`,
+        },
+      });
+      if (risp.ok) {
+        const data = await risp.json();
+        console.log(data);
+        setNumPagine(data.totalPages);
+        console.log(data.content);
+        setListaUtenti(data.content);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <Container>
@@ -83,8 +105,7 @@ const Utenti = () => {
                 style={{ cursor: "pointer" }}
                 onClick={() => {
                   setPagina(1);
-                  setOrdine();
-                  getUtenti(, 1);
+                  getByprovincia(1);
                 }}
               >
                 Provincia sede legale
