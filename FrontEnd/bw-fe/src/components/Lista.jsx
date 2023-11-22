@@ -10,7 +10,7 @@ const Lista = ({ listaClienti }) => {
             <div>{elem.nomeContatto}</div>
           </Col>
           <Col className="text-start">
-            <div>{elem.cognomeContatto}</div>
+            <div>{elem.fatturatoAnnuale}</div>
           </Col>
           <Col className="text-start">
             <div>{elem.telefonoContatto}</div>
