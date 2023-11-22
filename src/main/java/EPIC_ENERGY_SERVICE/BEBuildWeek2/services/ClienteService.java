@@ -151,4 +151,9 @@ public class ClienteService {
         return clienteRepository.save(c);
 
     }
+
+    public Page<Cliente> findByIndirizzoSedeLegaleComuneProvinciaOrderByNome(int page, int i, String order) {
+        Pageable p = PageRequest.of(page, i, Sort.by(order));
+        return clienteRepository.findByIndirizzoSedeLegaleComuneProvinciaOrderByNome(p);
+    }
 }

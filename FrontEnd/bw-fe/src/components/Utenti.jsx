@@ -83,8 +83,8 @@ const Utenti = () => {
                 style={{ cursor: "pointer" }}
                 onClick={() => {
                   setPagina(1);
-                  setOrdine("dataUltimoContatto");
-                  getUtenti("dataUltimoContatto", 1);
+                  setOrdine();
+                  getUtenti(, 1);
                 }}
               >
                 Provincia sede legale

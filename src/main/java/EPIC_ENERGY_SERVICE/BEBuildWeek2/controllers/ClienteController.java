@@ -36,6 +36,12 @@ public class ClienteController {
 
     }
 
+    @GetMapping("/get_all_order_by_provincia")
+    public Page<Cliente> getAllOrderByProvincia(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam(defaultValue = "id") String order) {
+        return clienteService.findByIndirizzoSedeLegaleComuneProvinciaOrderByNome(page, size > 20 ? 5 : size, order);
+
+    }
+
     @GetMapping("/{id}")
     public Cliente getSingleCliente(@PathVariable int id) {
         return clienteService.getById(id);
