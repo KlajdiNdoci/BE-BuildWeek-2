@@ -111,6 +111,7 @@ public class FatturaService {
     public Page<Fattura> findByYear(int page, int size, String order, int y) {
         Pageable pagina = PageRequest.of(page, size, Sort.by(order));
         return fatturaRepository.getByYear(pagina, y);
+
     }
 
 }
