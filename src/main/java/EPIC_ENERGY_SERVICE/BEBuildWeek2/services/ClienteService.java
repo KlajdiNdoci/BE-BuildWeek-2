@@ -97,12 +97,6 @@ public class ClienteService {
         clienteRepository.deleteAll();
     }
 
-    public Page<Cliente> getByDataInserimento(int page, int size, String order, LocalDate dataInserimento) {
-        Pageable pagina = PageRequest.of(page, size, Sort.by(order));
-        return clienteRepository.findByDataInserimento(pagina, dataInserimento);
-    }
-
-
     public Page<Cliente> findByDataUltimoContatto(int page, int size, String order, LocalDate dataUltimoContatto) {
         Pageable pagina = PageRequest.of(page, size, Sort.by(order));
         return clienteRepository.findByDataUltimoContatto(pagina, dataUltimoContatto);

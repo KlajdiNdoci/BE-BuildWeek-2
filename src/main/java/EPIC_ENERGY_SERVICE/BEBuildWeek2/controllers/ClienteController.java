@@ -50,7 +50,7 @@ public class ClienteController {
 
     @GetMapping("/getbydata")
     public Page<Cliente> getByDatainserimento(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam(defaultValue = "id") String order, @RequestParam LocalDate data) {
-        return clienteService.getByDataInserimento(page, size > 20 ? 5 : size, order, data);
+        return clienteService.findByDataInserimento(page, size > 20 ? 5 : size, order, data);
     }
 
     @GetMapping("/filter")
@@ -66,7 +66,11 @@ public class ClienteController {
         } else if (dataInserimento != null) {
             return clienteService.findByDataInserimento(page, size > 20 ? 5 : size, order, dataInserimento);
         } else if (fatturatoAnnuale != null) {
-            return clienteService.findByFatturatoAnnuale(page, size > 20 ? 5 : size, order, fatturatoAnnuale);
+            try {
+                return clienteService.findByFatturatoAnnuale(page, size > 20 ? 5 : size, order, fatturatoAnnuale);
+            } catch (NumberFormatException e) {
+                throw new BadRequestException("inserisci valori validi");
+            }
         } else if (dataUltimoContatto != null) {
             return clienteService.findByDataUltimoContatto(page, size > 20 ? 5 : size, order, dataUltimoContatto);
         } else {
