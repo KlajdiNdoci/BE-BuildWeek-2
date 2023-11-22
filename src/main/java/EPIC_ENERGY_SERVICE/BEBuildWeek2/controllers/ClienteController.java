@@ -50,8 +50,9 @@ public class ClienteController {
     @GetMapping("/getbydata")
     public Page<Cliente> getByDatainserimento(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size, @RequestParam(defaultValue = "id") String order, @RequestParam LocalDate data) {
         return clienteService.getByDataInserimento(page, size > 20 ? 5 : size, order, data);
-
     }
+
+
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)

@@ -1,6 +1,7 @@
 package EPIC_ENERGY_SERVICE.BEBuildWeek2.services;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Fattura;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.BadRequestException;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.FatturaPayload;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.repositories.FatturaRepository;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.utils.StatoFattura;
@@ -34,9 +35,18 @@ public class FatturaService {
 
     public Fattura save(FatturaPayload f) {
         Fattura newFattura = new Fattura();
-        newFattura.setImporto(f.importo());
-        newFattura.setData(f.data());
-        return fatturaRepository.save(newFattura);
+        if (f.statoFattura() == null) {
+            throw new BadRequestException("stato fattura obbligatorio");
+        } else if (f.statoFattura().toUpperCase().trim().equals("EMESSA") || f.statoFattura().toUpperCase().trim().equals("SCADUTA") || f.statoFattura().toUpperCase().trim().equals("IN_ATTESA") || f.statoFattura().toUpperCase().trim().equals("SALDATA")) {
+            newFattura.setImporto(f.importo());
+            newFattura.setData(f.data());
+            newFattura.setNumeroFattura(f.numeroFattura());
+            newFattura.setStatoFattura(StatoFattura.valueOf(f.statoFattura().toUpperCase().trim()));
+            return fatturaRepository.save(newFattura);
+        } else {
+            throw new BadRequestException("stato fattura non corretto inseriscine uno tra EMESSA,SCADUTA,IN_ATTESA,SALDATA");
+        }
+
     }
 
 
@@ -50,13 +60,17 @@ public class FatturaService {
     }
 
 
-    public Fattura findByIdAndUpdate(FatturaPayload body, int id) {
+    public Fattura findByIdAndUpdate(FatturaPayload f, int id) {
         Fattura fattura = getById(id);
-        fattura.setNumeroFattura(body.numeroFattura());
-        fattura.setData(body.data());
-        fattura.setImporto(body.importo());
-        fattura.setStatoFattura(body.statoFattura());
-        return fatturaRepository.save(fattura);
+        if (f.statoFattura().toUpperCase().trim().equals("EMESSA") || f.statoFattura().toUpperCase().trim().equals("SCADUTA") || f.statoFattura().toUpperCase().trim().equals("IN_ATTESA") || f.statoFattura().toUpperCase().trim().equals("SALDATA") || f.statoFattura() == null) {
+            fattura.setImporto(f.importo());
+            fattura.setData(f.data());
+            fattura.setStatoFattura(f.statoFattura() == null ? fattura.getStatoFattura() : StatoFattura.valueOf(f.statoFattura().toUpperCase().trim()));
+            fattura.setNumeroFattura(f.numeroFattura());
+            return fatturaRepository.save(fattura);
+        } else {
+            throw new BadRequestException("stato fattura non corretto inseriscine uno tra EMESSA,SCADUTA,IN_ATTESA,SALDATA");
+        }
     }
 
 
