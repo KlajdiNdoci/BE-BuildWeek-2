@@ -5,6 +5,7 @@ import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.BadRequestException;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.exceptions.ErrorList;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.FatturaPayload;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.services.FatturaService;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.utils.StatoFattura;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/fatture")
@@ -54,5 +57,28 @@ public class FatturaController {
         } else {
             return fatturaService.findByIdAndUpdate(body, id);
         }
+    }
+
+    @GetMapping("/requests")
+    public Page<Fattura> getRequests(@RequestParam(defaultValue = "0") int page,
+                                     @RequestParam(defaultValue = "10") int size,
+                                     @RequestParam(defaultValue = "id") String orderBy,
+                                     @RequestParam(required = false) String id_cliente,
+                                     @RequestParam(required = false) StatoFattura statoFattura,
+                                     @RequestParam(required = false) LocalDate data,
+                                     @RequestParam(required = false) String year,
+                                     @RequestParam(required = false) String imp1,
+                                     @RequestParam(required = false) String imp2) {
+
+        if (id_cliente != null)
+            return fatturaService.findByIdCliente(page, size > 20 ? 5 : size, orderBy, Integer.parseInt(id_cliente));
+        if (statoFattura != null)
+            return fatturaService.findByStatoFattura(page, size > 20 ? 5 : size, orderBy, statoFattura);
+        if (data != null) return fatturaService.findByData(page, size > 20 ? 5 : size, orderBy, data);
+        if (year != null) return fatturaService.findByYear(page, size > 20 ? 5 : size, orderBy, Integer.parseInt(year));
+        if (imp1 != null && imp2 != null)
+            return fatturaService.findByImporto(page, size > 20 ? 5 : size, orderBy, Double.parseDouble(imp1), Double.parseDouble(imp2));
+
+        throw new BadRequestException("Inserisci i parametri corretti");
     }
 }
