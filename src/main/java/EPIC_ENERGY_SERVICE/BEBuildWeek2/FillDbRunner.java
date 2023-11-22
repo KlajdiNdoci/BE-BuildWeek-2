@@ -36,7 +36,7 @@ public class FillDbRunner implements CommandLineRunner {
         comuniList.remove(comuniList.get(0));
 
 
-      /*  for (int i = 0; i < provinceList.size(); i++) {
+       /* for (int i = 0; i < provinceList.size(); i++) {
             List<String> arr = List.of(provinceList.get(i).split(";"));
             Provincia p = Provincia.builder().sigla(arr.get(0)).nome(arr.get(1)).regione(arr.get(2)).build();
             provinciaService.save(p);
