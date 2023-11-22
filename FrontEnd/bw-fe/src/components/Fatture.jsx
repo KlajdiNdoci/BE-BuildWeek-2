@@ -6,7 +6,7 @@ import ListaFatture from "./ListaFatture";
 const Fatture = () => {
   const [pagina, setPagina] = useState(1);
   const [numPagine, setNumPagine] = useState();
-  const [listaFatture, setListaFatture] = useState([]);
+  const [listaFatture, setListaFatture] = useState();
   const [show, setShow] = useState();
   const [req, setReq] = useState();
   const [req2, setReq2] = useState();
