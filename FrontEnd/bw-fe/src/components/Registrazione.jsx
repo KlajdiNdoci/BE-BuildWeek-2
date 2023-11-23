@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const Home = () => {
+const Registrazione = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [username, setUsername] = useState();
@@ -24,7 +24,7 @@ const Home = () => {
         localStorage.setItem("token", JSON.stringify(data));
         setEmail("");
         setPassword("");
-        nav("/utenti");
+        nav("/");
       }
     } catch (error) {
       console.log(error);
@@ -34,30 +34,6 @@ const Home = () => {
     <>
       <Container fluid="sm">
         <Form onSubmit={login}>
-          <Form.Group className="mt-3">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              required
-              value={email}
-              type="text"
-              placeholder="email"
-              onChange={e => {
-                setEmail(e.target.value);
-              }}
-            />
-          </Form.Group>
-          <Form.Group className="mt-3">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              required
-              value={password}
-              type="password"
-              placeholder="password"
-              onChange={e => {
-                setPassword(e.target.value);
-              }}
-            />
-          </Form.Group>
           <Form.Group className="mt-3">
             <Form.Label>Username</Form.Label>
             <Form.Control
@@ -94,6 +70,31 @@ const Home = () => {
               }}
             />
           </Form.Group>
+          <Form.Group className="mt-3">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+              required
+              value={email}
+              type="text"
+              placeholder="email"
+              onChange={e => {
+                setEmail(e.target.value);
+              }}
+            />
+          </Form.Group>
+          <Form.Group className="mt-3">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              required
+              value={password}
+              type="password"
+              placeholder="password"
+              onChange={e => {
+                setPassword(e.target.value);
+              }}
+            />
+          </Form.Group>
+
           <Button className="mt-3" type="submit">
             Submit form
           </Button>
@@ -102,4 +103,4 @@ const Home = () => {
     </>
   );
 };
-export default Home;
+export default Registrazione;
