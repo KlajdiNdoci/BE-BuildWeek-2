@@ -24,7 +24,7 @@ public class IndirizzoService {
 
     public Indirizzo save(NuovoIndirizzoDTO body) {
         Indirizzo indirizzo = new Indirizzo();
-        Comune c = comuneRepository.findByNome(body.comune()).orElseThrow(() -> new BadRequestException("comune non trovato"));
+        Comune c = comuneRepository.findByNomeIgnoreCase(body.comune()).orElseThrow(() -> new BadRequestException("comune non trovato"));
         indirizzo.setCap(body.cap());
         indirizzo.setComune(c);
         indirizzo.setVia(body.via());

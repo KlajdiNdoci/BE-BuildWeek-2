@@ -26,7 +26,7 @@ public class JWTTools {
             Jwts.parserBuilder().setSigningKey(Keys.hmacShaKeyFor(secret.getBytes()))
                     .build().parse(token);
         } catch (Exception e) {
-            throw new UnauthorizedException("Unvalid token! Redo the login!");
+            throw new UnauthorizedException("Token non valido, rifai il login!");
         }
     }
 
