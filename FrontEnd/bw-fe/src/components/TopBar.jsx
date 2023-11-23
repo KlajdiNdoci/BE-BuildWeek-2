@@ -15,13 +15,13 @@ const TopBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Link to={"/"} className={loc.pathname === "/" && "selected"}>
+            <Link to={"/"} className={loc.pathname === "/" ? "selected" : ""}>
               Home
             </Link>
-            <Link to={"/utenti"} className={loc.pathname === "/utenti" && "selected"}>
+            <Link to={"/utenti"} className={loc.pathname === "/utenti" ? "selected" : ""}>
               Utenti
             </Link>
-            <Link to={"/fatture"} className={loc.pathname === "/fatture" && "selected"}>
+            <Link to={"/fatture"} className={loc.pathname === "/fatture" ? "selected" : ""}>
               Fatture
             </Link>
           </Nav>
