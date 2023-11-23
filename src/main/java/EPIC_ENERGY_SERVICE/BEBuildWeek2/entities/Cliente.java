@@ -24,6 +24,7 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String nomeCliente;
     private String ragioneSociale;
     private String partitaIva;
     private String email;

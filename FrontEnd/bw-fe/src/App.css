@@ -21,3 +21,10 @@ a {
 a.page-link {
   margin: 0;
 }
+
+#envelop:hover {
+  opacity: 0.6;
+}
+#envelop:active {
+  opacity: 0.2;
+}

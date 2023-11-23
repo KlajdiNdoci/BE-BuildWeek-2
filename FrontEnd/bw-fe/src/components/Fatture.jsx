@@ -105,6 +105,22 @@ const Fatture = () => {
             {listaFatture && (
               <>
                 <ListGroup className="mt-5 w-100 text-center">
+                  <ListGroup.Item className="bg-light">
+                    <Row xs={4} className="d-flex justify-content-between align-items-center">
+                      <Col className="text-start">
+                        <span style={{ fontWeight: "bold" }}>N° Fattura</span>
+                      </Col>
+                      <Col className="text-start">
+                        <span style={{ fontWeight: "bold" }}>Stato</span>
+                      </Col>
+                      <Col className="text-start">
+                        <span style={{ fontWeight: "bold" }}>Importo</span>
+                      </Col>
+                      <Col className="text-start">
+                        <span style={{ fontWeight: "bold" }}>Data</span>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
                   <ListaFatture listaFatture={listaFatture} />
                 </ListGroup>
                 <Pagination className="mt-3">
@@ -158,7 +174,7 @@ const Fatture = () => {
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>{req && req.substring(0, req.length - 1).toUpperCase()}</Form.Label>
               <Form.Control
-                type="text"
+                type={req && req.substring(0, 5) === "data=" ? "date" : "text"}
                 placeholder={req && req.substring(0, req.length - 1)}
                 autoFocus
                 value={search}
@@ -169,6 +185,7 @@ const Fatture = () => {
 
               {req === "imp1=" && (
                 <Form.Control
+                  className="mt-3"
                   type="text"
                   placeholder={req2 && req2.substring(0, req2.length - 1)}
                   value={search2}
