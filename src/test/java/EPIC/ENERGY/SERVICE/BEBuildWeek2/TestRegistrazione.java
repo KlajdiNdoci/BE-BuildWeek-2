@@ -59,7 +59,7 @@ public class TestRegistrazione {
 
     @Test
     public void loginUser() throws Exception {
-        given(authService.saveUser(ArgumentMatchers.any())).willAnswer(invocationOnMock -> invocationOnMock.getArgument(0));
+        given(authService.authenticateUser(ArgumentMatchers.any())).willReturn("");
 
         ResultActions resp = mockMvc.perform(post("/auth/login").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(utenteLoginDTO)));
 
