@@ -12,8 +12,8 @@ const Fatture = () => {
   const [req2, setReq2] = useState();
   const [search, setSearch] = useState();
   const [search2, setSearch2] = useState();
-  const handleShow = (page) => setShow(true);
-  const handleClose = (page) => setShow(false);
+  const handleShow = page => setShow(true);
+  const handleClose = page => setShow(false);
   const getFatture = async (request, p) => {
     const aut = JSON.parse(localStorage.getItem("token"));
     console.log(aut.accessToken);
@@ -158,14 +158,14 @@ const Fatture = () => {
         </Modal.Header>
         <Modal.Body>
           <Form
-            onSubmit={(e) => {
+            onSubmit={e => {
               e.preventDefault();
               console.log(search);
               console.log();
               req === "statoFattura="
-                ? setReq((prevReq) => `${prevReq}${search.toUpperCase()}`)
-                : setReq((prevReq) => `${prevReq}${search}`);
-              req.substring(0, 5) === "imp1=" && setReq2((prevReq2) => `${prevReq2}${search2}`);
+                ? setReq(prevReq => `${prevReq}${search.toUpperCase()}`)
+                : setReq(prevReq => `${prevReq}${search}`);
+              req.substring(0, 5) === "imp1=" && setReq2(prevReq2 => `${prevReq2}${search2}`);
               req.substring(0, 5) === "imp1="
                 ? getFatture(`${req}${search}&${req2}${search2}`, 1)
                 : getFatture(`${req}${search.toUpperCase()}`, 1);
@@ -178,7 +178,7 @@ const Fatture = () => {
                 placeholder={req && req.substring(0, req.length - 1)}
                 autoFocus
                 value={search}
-                onChange={(e) => {
+                onChange={e => {
                   setSearch(e.target.value);
                 }}
               />
@@ -189,7 +189,7 @@ const Fatture = () => {
                   type="text"
                   placeholder={req2 && req2.substring(0, req2.length - 1)}
                   value={search2}
-                  onChange={(e) => {
+                  onChange={e => {
                     setSearch2(e.target.value);
                   }}
                 />

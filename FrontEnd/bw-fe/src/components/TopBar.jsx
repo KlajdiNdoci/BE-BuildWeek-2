@@ -11,7 +11,7 @@ const TopBar = () => {
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
         <Image src={logo} width="100px" />
-        <Navbar.Brand href="#home">Epic Energy</Navbar.Brand>
+        <Navbar.Brand>Epic Energy</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
