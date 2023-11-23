@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, ListGroup, Modal, Pagination, Row } from "react-bootstrap";
 import Lista from "./Lista";
 import { isDisabled } from "@testing-library/user-event/dist/utils";
+import { Link } from "react-router-dom";
+import { Envelope } from "react-bootstrap-icons";
 
 const Utenti = () => {
   const [listaUtenti, setListaUtenti] = useState();
@@ -19,7 +21,7 @@ const Utenti = () => {
     console.log(aut.accessToken);
     try {
       console.log(pagina);
-      const risp = await fetch(`http://localhost:3001/clienti?order=${order}&page=${p - 1}`, {
+      const risp = await fetch(`http://localhost:3001/clienti?order=${order}&page=${p - 1}&size=10`, {
         method: "GET",
         headers: {
           "content-type": "application/json",
@@ -38,7 +40,7 @@ const Utenti = () => {
     }
   };
 
-  const getByprovincia = async page => {
+  const getByprovincia = async (page) => {
     const aut = JSON.parse(localStorage.getItem("token"));
     try {
       const risp = await fetch(`http://localhost:3001/clienti/get_all_order_by_provincia?page=${page - 1}`, {
@@ -59,9 +61,9 @@ const Utenti = () => {
       console.log(error);
     }
   };
-  const handleShow = page => setShow(true);
-  const handleClose = page => setShow(false);
-  const findAllByProvincia = async page => {
+  const handleShow = (page) => setShow(true);
+  const handleClose = (page) => setShow(false);
+  const findAllByProvincia = async (page) => {
     const aut = JSON.parse(localStorage.getItem("token"));
     try {
       const risp = await fetch(`http://localhost:3001/clienti/get_all_by_provincia?page=${page - 1}&prov=${search}`, {
@@ -83,10 +85,10 @@ const Utenti = () => {
     }
   };
 
-  const handleShowFilter = page => setShowFilter(true);
-  const handleCloseFilter = page => setShowFilter(false);
+  const handleShowFilter = (page) => setShowFilter(true);
+  const handleCloseFilter = (page) => setShowFilter(false);
   const [filter, setFilter] = useState();
-  const filterClienti = async page => {
+  const filterClienti = async (page) => {
     const aut = JSON.parse(localStorage.getItem("token"));
     try {
       const risp = await fetch(`http://localhost:3001/clienti/filter?page=${page - 1}&${filter}=${search}`, {
@@ -178,7 +180,7 @@ const Utenti = () => {
                   handleShow();
                 }}
               >
-                cerca provincia
+                Cerca provincia
               </li>
               <li
                 style={{ cursor: "pointer" }}
@@ -242,6 +244,29 @@ const Utenti = () => {
             {listaUtenti && (
               <>
                 <ListGroup className="mt-5 w-100 text-center">
+                  <ListGroup.Item className="bg-light">
+                    <Row className="d-flex justify-content-between align-items-center">
+                      <Col xs={2} className="text-start">
+                        <span style={{ fontWeight: "bold" }}>Nome</span>
+                      </Col>
+                      <Col xs={2} className="text-start">
+                        <span style={{ fontWeight: "bold" }}>Fatturato</span>
+                      </Col>
+                      <Col xs={3} className="text-start">
+                        <span style={{ fontWeight: "bold" }}>Telefono</span>
+                      </Col>
+                      <Col xs={4} className="text-start">
+                        <span style={{ fontWeight: "bold" }}>Email</span>
+                      </Col>
+                      <Col xs={1} className="text-start">
+                        <span>
+                          <Link to={`#`}>
+                            <Envelope />
+                          </Link>
+                        </span>
+                      </Col>
+                    </Row>
+                  </ListGroup.Item>
                   <Lista listaClienti={listaUtenti} />
                 </ListGroup>
                 <Pagination className="mt-3">
@@ -295,7 +320,7 @@ const Utenti = () => {
         </Modal.Header>
         <Modal.Body>
           <Form
-            onSubmit={e => {
+            onSubmit={(e) => {
               e.preventDefault();
               findAllByProvincia(1);
             }}
@@ -307,7 +332,7 @@ const Utenti = () => {
                 placeholder="provincia"
                 autoFocus
                 value={search}
-                onChange={e => {
+                onChange={(e) => {
                   setSearch(e.target.value);
                 }}
               />
@@ -344,7 +369,7 @@ const Utenti = () => {
         </Modal.Header>
         <Modal.Body>
           <Form
-            onSubmit={e => {
+            onSubmit={(e) => {
               e.preventDefault();
               filterClienti(1);
             }}
@@ -357,7 +382,7 @@ const Utenti = () => {
                   placeholder={nomePH}
                   autoFocus
                   value={search}
-                  onChange={e => {
+                  onChange={(e) => {
                     setSearch(e.target.value);
                   }}
                 />
@@ -367,7 +392,7 @@ const Utenti = () => {
                   placeholder={nomePH}
                   autoFocus
                   value={search}
-                  onChange={e => {
+                  onChange={(e) => {
                     setSearch(e.target.value);
                   }}
                 />
