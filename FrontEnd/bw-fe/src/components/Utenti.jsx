@@ -9,7 +9,11 @@ const Utenti = () => {
   const [numPagine, setNumPagine] = useState();
   const [ordine, setOrdine] = useState();
   const [show, setShow] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
   const [search, setSearch] = useState();
+  const [nomeFiltro, setNomeFiltro] = useState();
+  const [nomePH, setNomePH] = useState();
+  const [nomeFunzione, setNomeFunzione] = useState();
   const getUtenti = async (order, p) => {
     const aut = JSON.parse(localStorage.getItem("token"));
     console.log(aut.accessToken);
@@ -34,7 +38,7 @@ const Utenti = () => {
     }
   };
 
-  const getByprovincia = async (page) => {
+  const getByprovincia = async page => {
     const aut = JSON.parse(localStorage.getItem("token"));
     try {
       const risp = await fetch(`http://localhost:3001/clienti/get_all_order_by_provincia?page=${page - 1}`, {
@@ -55,9 +59,9 @@ const Utenti = () => {
       console.log(error);
     }
   };
-  const handleShow = (page) => setShow(true);
-  const handleClose = (page) => setShow(false);
-  const findAllByProvincia = async (page) => {
+  const handleShow = page => setShow(true);
+  const handleClose = page => setShow(false);
+  const findAllByProvincia = async page => {
     const aut = JSON.parse(localStorage.getItem("token"));
     try {
       const risp = await fetch(`http://localhost:3001/clienti/get_all_by_provincia?page=${page - 1}&prov=${search}`, {
@@ -71,7 +75,31 @@ const Utenti = () => {
         const data = await risp.json();
         console.log(data);
         setNumPagine(data.totalPages);
-        setSearch("");
+        console.log(data.content);
+        setListaUtenti(data.content);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleShowFilter = page => setShowFilter(true);
+  const handleCloseFilter = page => setShowFilter(false);
+  const [filter, setFilter] = useState();
+  const filterClienti = async page => {
+    const aut = JSON.parse(localStorage.getItem("token"));
+    try {
+      const risp = await fetch(`http://localhost:3001/clienti/filter?page=${page - 1}&${filter}=${search}`, {
+        method: "GET",
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${aut.accessToken}`,
+        },
+      });
+      if (risp.ok) {
+        const data = await risp.json();
+        console.log(data);
+        setNumPagine(data.totalPages);
         console.log(data.content);
         setListaUtenti(data.content);
       }
@@ -92,6 +120,7 @@ const Utenti = () => {
                 onClick={() => {
                   setPagina(1);
                   setOrdine("nomeContatto");
+                  setNomeFunzione("getUtenti");
                   getUtenti("nomeContatto", 1);
                 }}
               >
@@ -102,6 +131,7 @@ const Utenti = () => {
                 onClick={() => {
                   setPagina(1);
                   setOrdine("fatturatoAnnuale");
+                  setNomeFunzione("getUtenti");
                   getUtenti("fatturatoAnnuale", 1);
                 }}
               >
@@ -112,6 +142,7 @@ const Utenti = () => {
                 onClick={() => {
                   setPagina(1);
                   setOrdine("dataInserimento");
+                  setNomeFunzione("getUtenti");
                   getUtenti("dataInserimento", 1);
                 }}
               >
@@ -122,6 +153,7 @@ const Utenti = () => {
                 onClick={() => {
                   setPagina(1);
                   setOrdine("dataUltimoContatto");
+                  setNomeFunzione("getUtenti");
                   getUtenti("dataUltimoContatto", 1);
                 }}
               >
@@ -131,13 +163,73 @@ const Utenti = () => {
                 style={{ cursor: "pointer" }}
                 onClick={() => {
                   setPagina(1);
+                  setNomeFunzione("getByprovincia");
                   getByprovincia(1);
                 }}
               >
                 Provincia sede legale
               </li>
-              <li style={{ cursor: "pointer" }} onClick={handleShow}>
+              <li
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setPagina(1);
+                  setNomeFunzione("findAllByProvincia");
+                  handleShow();
+                }}
+              >
                 cerca provincia
+              </li>
+              <li
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setPagina(1);
+                  setFilter("fatturatoAnnuale");
+                  setNomeFiltro("Fatturato annuale");
+                  setNomePH("Scrivi un numero");
+                  setNomeFunzione("filterClienti");
+                  handleShowFilter();
+                }}
+              >
+                Filtra per fatturato annuale
+              </li>
+              <li
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setPagina(1);
+                  setFilter("dataInserimento");
+                  setNomeFiltro("Data di inserimento");
+                  setNomePH("yyyy-MM-dd");
+                  setNomeFunzione("filterClienti");
+                  handleShowFilter();
+                }}
+              >
+                Filtra per data di inserimento
+              </li>
+              <li
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setPagina(1);
+                  setFilter("dataUltimoContatto");
+                  setNomeFiltro("Data di ultimo contatto");
+                  setNomePH("yyyy-MM-dd");
+                  setNomeFunzione("filterClienti");
+                  handleShowFilter();
+                }}
+              >
+                Filtra per data di ultimo contatto
+              </li>
+              <li
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  setPagina(1);
+                  setFilter("nome");
+                  setNomeFiltro("Parte del nome");
+                  setNomePH("Scrivi un nome o solo una parte");
+                  setNomeFunzione("filterClienti");
+                  handleShowFilter();
+                }}
+              >
+                Filtra per parte del nome
               </li>
             </ul>
           </Col>
@@ -154,7 +246,15 @@ const Utenti = () => {
                     <Pagination.Prev
                       onClick={() => {
                         setPagina(pagina - 1);
-                        getUtenti(ordine, pagina - 1);
+                        if (nomeFunzione === "getUtenti") {
+                          getUtenti(ordine, pagina - 1);
+                        } else if (nomeFunzione === "getByprovincia") {
+                          getByprovincia(pagina - 1);
+                        } else if (nomeFunzione === "findAllByProvincia") {
+                          findAllByProvincia(pagina - 1);
+                        } else if (nomeFunzione === "filterClienti") {
+                          filterClienti(pagina - 1);
+                        }
                       }}
                     />
                   )}
@@ -165,7 +265,15 @@ const Utenti = () => {
                     <Pagination.Next
                       onClick={() => {
                         setPagina(pagina + 1);
-                        getUtenti(ordine, pagina + 1);
+                        if (nomeFunzione === "getUtenti") {
+                          getUtenti(ordine, pagina + 1);
+                        } else if (nomeFunzione === "getByprovincia") {
+                          getByprovincia(pagina + 1);
+                        } else if (nomeFunzione === "findAllByProvincia") {
+                          findAllByProvincia(pagina + 1);
+                        } else if (nomeFunzione === "filterClienti") {
+                          filterClienti(pagina + 1);
+                        }
                       }}
                     />
                   )}
@@ -182,7 +290,7 @@ const Utenti = () => {
         </Modal.Header>
         <Modal.Body>
           <Form
-            onSubmit={(e) => {
+            onSubmit={e => {
               e.preventDefault();
               findAllByProvincia(1);
             }}
@@ -194,7 +302,7 @@ const Utenti = () => {
                 placeholder="provincia"
                 autoFocus
                 value={search}
-                onChange={(e) => {
+                onChange={e => {
                   setSearch(e.target.value);
                 }}
               />
@@ -215,6 +323,54 @@ const Utenti = () => {
                 variant="primary"
                 onClick={() => {
                   handleClose();
+                }}
+                className="ms-3"
+              >
+                Search
+              </Button>
+            </Modal.Footer>
+          </Form>
+        </Modal.Body>
+      </Modal>
+
+      <Modal show={showFilter} onHide={handleCloseFilter}>
+        <Modal.Header closeButton>
+          <Modal.Title>{nomeFiltro}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form
+            onSubmit={e => {
+              e.preventDefault();
+              filterClienti(1);
+            }}
+          >
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Filtra</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder={nomePH}
+                autoFocus
+                value={search}
+                onChange={e => {
+                  setSearch(e.target.value);
+                }}
+              />
+            </Form.Group>
+            <Modal.Footer>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  handleCloseFilter();
+                  setSearch("");
+                }}
+              >
+                Close
+              </Button>
+              <Button
+                type="submit"
+                variant="primary"
+                onClick={() => {
+                  handleCloseFilter();
                 }}
                 className="ms-3"
               >
