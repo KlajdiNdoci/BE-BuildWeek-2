@@ -9,19 +9,19 @@ const Lista = ({ listaClienti }) => {
       <ListGroup.Item key={index}>
         <Row className="d-flex justify-content-between align-items-center">
           <Col xs={2} className="text-start">
-            <div>{elem.nomeContatto}</div>
+            <div>{elem.nomeCliente}</div>
           </Col>
           <Col xs={2} className="text-start">
             <div>{elem.fatturatoAnnuale}</div>
           </Col>
           <Col xs={3} className="text-start">
-            <div>{elem.telefonoContatto}</div>
+            <div>{elem.telefono}</div>
           </Col>
           <Col xs={4} className="text-start">
-            <div>{elem.emailContatto}</div>
+            <div>{elem.email}</div>
           </Col>
           <Col xs={1} className="text-start">
-            <div>
+            <div id="envelop">
               <Link to={`/email/send/${elem.id}`}>
                 <Envelope />
               </Link>
