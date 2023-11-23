@@ -172,6 +172,7 @@ const Utenti = () => {
               <li
                 style={{ cursor: "pointer" }}
                 onClick={() => {
+                  setSearch("");
                   setPagina(1);
                   setNomeFunzione("findAllByProvincia");
                   handleShow();
@@ -182,6 +183,7 @@ const Utenti = () => {
               <li
                 style={{ cursor: "pointer" }}
                 onClick={() => {
+                  setSearch("");
                   setPagina(1);
                   setFilter("fatturatoAnnuale");
                   setNomeFiltro("Fatturato annuale");
@@ -195,6 +197,7 @@ const Utenti = () => {
               <li
                 style={{ cursor: "pointer" }}
                 onClick={() => {
+                  setSearch("");
                   setPagina(1);
                   setFilter("dataInserimento");
                   setNomeFiltro("Data di inserimento");
@@ -208,6 +211,7 @@ const Utenti = () => {
               <li
                 style={{ cursor: "pointer" }}
                 onClick={() => {
+                  setSearch("");
                   setPagina(1);
                   setFilter("dataUltimoContatto");
                   setNomeFiltro("Data di ultimo contatto");
@@ -221,6 +225,7 @@ const Utenti = () => {
               <li
                 style={{ cursor: "pointer" }}
                 onClick={() => {
+                  setSearch("");
                   setPagina(1);
                   setFilter("nome");
                   setNomeFiltro("Parte del nome");
@@ -346,15 +351,27 @@ const Utenti = () => {
           >
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Filtra</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder={nomePH}
-                autoFocus
-                value={search}
-                onChange={e => {
-                  setSearch(e.target.value);
-                }}
-              />
+              {filter === "dataInserimento" || filter === "dataUltimoContatto" ? (
+                <Form.Control
+                  type="date"
+                  placeholder={nomePH}
+                  autoFocus
+                  value={search}
+                  onChange={e => {
+                    setSearch(e.target.value);
+                  }}
+                />
+              ) : (
+                <Form.Control
+                  type="text"
+                  placeholder={nomePH}
+                  autoFocus
+                  value={search}
+                  onChange={e => {
+                    setSearch(e.target.value);
+                  }}
+                />
+              )}
             </Form.Group>
             <Modal.Footer>
               <Button
