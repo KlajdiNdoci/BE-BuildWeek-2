@@ -22,7 +22,7 @@ const Lista = ({ listaClienti }) => {
           </Col>
           <Col xs={1} className="text-start">
             <div>
-              <Link to={`/email/${elem.id}`}>
+              <Link to={`/email/send/${elem.id}`}>
                 <Envelope />
               </Link>
             </div>

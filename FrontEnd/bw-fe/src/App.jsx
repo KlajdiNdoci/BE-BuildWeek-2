@@ -17,7 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/utenti" element={<Utenti />} />
           <Route path="/fatture" element={<Fatture />} />
-          <Route path="/email/:id" element={<Email />} />
+          <Route path="/email/send/:id" element={<Email />} />
         </Routes>
       </BrowserRouter>
     </>
