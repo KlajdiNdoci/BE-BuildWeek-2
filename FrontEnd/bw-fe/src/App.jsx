@@ -6,6 +6,7 @@ import Utenti from "./components/Utenti";
 import Home from "./components/Home";
 import TopBar from "./components/TopBar";
 import Fatture from "./components/Fatture";
+import Email from "./components/Email";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/utenti" element={<Utenti />} />
           <Route path="/fatture" element={<Fatture />} />
+          <Route path="/email/:id" element={<Email />} />
         </Routes>
       </BrowserRouter>
     </>
