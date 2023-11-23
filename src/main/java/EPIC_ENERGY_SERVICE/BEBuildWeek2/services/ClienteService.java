@@ -114,9 +114,9 @@ public class ClienteService {
         return clienteRepository.findByFatturatoAnnuale(pagina, fatturatoAnnuale);
     }
 
-    public Page<Cliente> findByNomeContattoStartingWithIgnoreCase(int page, int size, String order, String nome) {
+    public Page<Cliente> findByNomeClienteStartingWithIgnoreCase(int page, int size, String order, String nome) {
         Pageable pagina = PageRequest.of(page, size, Sort.by(order));
-        return clienteRepository.findByNomeContattoStartingWithIgnoreCase(pagina, nome);
+        return clienteRepository.findByNomeClienteStartingWithIgnoreCase(pagina, nome);
     }
 
 

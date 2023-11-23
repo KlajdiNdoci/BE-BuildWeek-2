@@ -23,7 +23,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     @Query("select c from Cliente c order by c.indirizzoSedeLegale.comune.provincia.nome ")
     Page<Cliente> findByIndirizzoSedeLegaleComuneProvinciaOrderByNome(Pageable p);
 
-    Page<Cliente> findByNomeContattoStartingWithIgnoreCase(Pageable pageable, String nome);
+    Page<Cliente> findByNomeClienteStartingWithIgnoreCase(Pageable pageable, String nome);
 
 
 }

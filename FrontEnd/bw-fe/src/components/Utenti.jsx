@@ -40,10 +40,10 @@ const Utenti = () => {
     }
   };
 
-  const getByprovincia = async page => {
+  const getByprovincia = async (page) => {
     const aut = JSON.parse(localStorage.getItem("token"));
     try {
-      const risp = await fetch(`http://localhost:3001/clienti/get_all_order_by_provincia?page=${page - 1}`, {
+      const risp = await fetch(`http://localhost:3001/clienti/get_all_order_by_provincia?page=${page - 1}&size=10`, {
         method: "GET",
         headers: {
           "content-type": "application/json",
@@ -61,9 +61,9 @@ const Utenti = () => {
       console.log(error);
     }
   };
-  const handleShow = page => setShow(true);
-  const handleClose = page => setShow(false);
-  const findAllByProvincia = async page => {
+  const handleShow = (page) => setShow(true);
+  const handleClose = (page) => setShow(false);
+  const findAllByProvincia = async (page) => {
     const aut = JSON.parse(localStorage.getItem("token"));
     try {
       const risp = await fetch(
@@ -88,10 +88,10 @@ const Utenti = () => {
     }
   };
 
-  const handleShowFilter = page => setShowFilter(true);
-  const handleCloseFilter = page => setShowFilter(false);
+  const handleShowFilter = (page) => setShowFilter(true);
+  const handleCloseFilter = (page) => setShowFilter(false);
   const [filter, setFilter] = useState();
-  const filterClienti = async page => {
+  const filterClienti = async (page) => {
     const aut = JSON.parse(localStorage.getItem("token"));
     try {
       const risp = await fetch(`http://localhost:3001/clienti/filter?page=${page - 1}&${filter}=${search}&size=10`, {
@@ -124,9 +124,9 @@ const Utenti = () => {
                 style={{ cursor: "pointer" }}
                 onClick={() => {
                   setPagina(1);
-                  setOrdine("nomeContatto");
+                  setOrdine("nomeCliente");
                   setNomeFunzione("getUtenti");
-                  getUtenti("nomeContatto", 1);
+                  getUtenti("nomeCliente", 1);
                 }}
               >
                 Nome
@@ -323,7 +323,7 @@ const Utenti = () => {
         </Modal.Header>
         <Modal.Body>
           <Form
-            onSubmit={e => {
+            onSubmit={(e) => {
               e.preventDefault();
               findAllByProvincia(1);
             }}
@@ -335,7 +335,7 @@ const Utenti = () => {
                 placeholder="provincia"
                 autoFocus
                 value={search}
-                onChange={e => {
+                onChange={(e) => {
                   setSearch(e.target.value);
                 }}
               />
@@ -372,7 +372,7 @@ const Utenti = () => {
         </Modal.Header>
         <Modal.Body>
           <Form
-            onSubmit={e => {
+            onSubmit={(e) => {
               e.preventDefault();
               filterClienti(1);
             }}
@@ -385,7 +385,7 @@ const Utenti = () => {
                   placeholder={nomePH}
                   autoFocus
                   value={search}
-                  onChange={e => {
+                  onChange={(e) => {
                     setSearch(e.target.value);
                   }}
                 />
@@ -395,7 +395,7 @@ const Utenti = () => {
                   placeholder={nomePH}
                   autoFocus
                   value={search}
-                  onChange={e => {
+                  onChange={(e) => {
                     setSearch(e.target.value);
                   }}
                 />
