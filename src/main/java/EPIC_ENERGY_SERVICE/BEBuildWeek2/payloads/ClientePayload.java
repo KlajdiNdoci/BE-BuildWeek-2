@@ -8,7 +8,8 @@ import jakarta.validation.constraints.Pattern;
 import java.time.LocalDate;
 
 public record ClientePayload(
-
+        @NotEmpty(message = "Il campo nome cliente non può essere vuoto")
+        String nomeCliente,
         @NotEmpty(message = "Il campo ragione sociale non può essere vuoto")
         String ragioneSociale,
         @NotEmpty(message = "Il campo partita iva non può essere vuoto")
