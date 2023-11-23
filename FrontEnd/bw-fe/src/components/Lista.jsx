@@ -9,7 +9,7 @@ const Lista = ({ listaClienti }) => {
       <ListGroup.Item key={index}>
         <Row className="d-flex justify-content-between align-items-center">
           <Col xs={2} className="text-start">
-            <div>{elem.nomeCliente}</div>
+            <div className="text-truncate">{elem.nomeCliente}</div>
           </Col>
           <Col xs={2} className="text-start">
             <div>{elem.fatturatoAnnuale}</div>
