@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface ComuneRepository extends JpaRepository<Comune, Integer> {
-    Optional<Comune> findByNome(String nome);
+    Optional<Comune> findByNomeIgnoreCase(String nome);
 }

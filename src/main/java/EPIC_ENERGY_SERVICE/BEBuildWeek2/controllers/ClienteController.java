@@ -95,6 +95,7 @@ public class ClienteController {
     }
 
     @PutMapping("/modifica_indirizzi/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Cliente modifyCliente(@RequestBody @Validated ClientePayloadModificaIndirizzo body, BindingResult validation, @PathVariable int id) {
         if (validation.hasErrors()) {
             throw new ErrorList(validation.getAllErrors());
