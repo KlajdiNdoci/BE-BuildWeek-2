@@ -62,7 +62,7 @@ public class ClienteController {
                                      @RequestParam(required = false) Double fatturatoAnnuale,
                                      @RequestParam(required = false) LocalDate dataUltimoContatto) {
         if (nome != null) {
-            return clienteService.findByNomeContattoStartingWithIgnoreCase(page, size > 20 ? 5 : size, order, nome);
+            return clienteService.findByNomeClienteStartingWithIgnoreCase(page, size > 20 ? 5 : size, order, nome);
         } else if (dataInserimento != null) {
             return clienteService.findByDataInserimento(page, size > 20 ? 5 : size, order, dataInserimento);
         } else if (fatturatoAnnuale != null) {
