@@ -4,14 +4,16 @@ import lombok.Getter;
 import org.springframework.validation.ObjectError;
 
 import java.util.List;
-
 @Getter
-public class BadRequestException extends RuntimeException {
+public class ErrorList extends RuntimeException {
+
     private List<ObjectError> errorList;
-    public BadRequestException(String message){
+
+    public ErrorList(String message) {
         super(message);
     }
-    public BadRequestException(List<ObjectError> errors){
-        this.errorList=errors;
+
+    public ErrorList(List<ObjectError> objList) {
+        this.errorList = objList;
     }
 }
