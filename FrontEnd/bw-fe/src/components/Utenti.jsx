@@ -274,13 +274,7 @@ const Utenti = () => {
                       <Col xs={4} className="text-start">
                         <span style={{ fontWeight: "bold" }}>Email</span>
                       </Col>
-                      <Col xs={1} className="text-start">
-                        <span>
-                          <Link to={`#`}>
-                            <Envelope />
-                          </Link>
-                        </span>
-                      </Col>
+                      <Col xs={1} className="text-start"></Col>
                     </Row>
                   </ListGroup.Item>
                   <Lista listaClienti={listaUtenti} />
