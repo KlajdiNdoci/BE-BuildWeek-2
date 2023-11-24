@@ -33,7 +33,7 @@ const Registrazione = () => {
   return (
     <>
       <Container className="pt-5">
-        <div className="inserimento_dati w-50 mx-auto border p-4 mt-5 shadow bg-light" style={{ borderRadius: "20px" }}>
+        <div className="inserimento_dati w-50 mx-auto border p-4 mt-3 shadow bg-light" style={{ borderRadius: "20px" }}>
           <div className="mb-5">
             <h2>Registrazione</h2>
           </div>
