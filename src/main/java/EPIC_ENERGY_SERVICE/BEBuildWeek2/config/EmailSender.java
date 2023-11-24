@@ -32,7 +32,7 @@ public class EmailSender {
         Email to = new Email(recipient);
         Content content = new Content("text/html",
                 "<p>Benvenuto su EPIC ENERGY SERVICES</p>" +
-                        "<p><a href=\"http://localhost:3000/utenti\"><button style=\"padding:10px; background-color:blue; color:white; text-decoration:none; border:none; border-radius:5px; cursor:pointer;\">Clicca qui</button></a></p>"
+                        "<p><a href=\"http://localhost:3000\"><button style=\"padding:10px; background-color:blue; color:white; text-decoration:none; border:none; border-radius:5px; cursor:pointer;\">Clicca qui</button></a></p>"
         );
         Mail mail = new Mail(from, subject, to, content);
 
