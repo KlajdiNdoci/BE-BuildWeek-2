@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
-import { Link, useParams } from "react-router-dom";
+import { Alert, Button, Container, Form } from "react-bootstrap";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const Email = () => {
   const params = useParams();
   const [cliente, setCliente] = useState();
   const [oggetto, setOggetto] = useState();
   const [contenuto, setContenuto] = useState();
+  const [statoMail, setStatoMail] = useState(false);
+  const nav = useNavigate();
+  const [cont, setcont] = useState(5);
 
   const getCliente = async () => {
     const aut = JSON.parse(localStorage.getItem("token"));
@@ -49,6 +52,17 @@ const Email = () => {
       if (risp.ok) {
         setContenuto("");
         setOggetto("");
+        setStatoMail(true);
+        let x = 5;
+        const timer = setInterval(() => {
+          setcont((prevcont) => prevcont - 1);
+          x--;
+          if (x === 0) {
+            setStatoMail(false);
+            clearInterval(timer);
+            nav("/utenti");
+          }
+        }, 1000);
       } else {
         console.error("Failed to send email:", risp.statusText);
       }
@@ -64,50 +78,60 @@ const Email = () => {
 
   return (
     <>
+      {statoMail && <Alert variant="success">Email inviata correttamente. Sarai reindirizzato in {cont}</Alert>}
       {cliente && (
-        <Container className="mt-5">
-          <Form
-            onSubmit={e => {
-              e.preventDefault();
-              sendEmail();
-            }}
+        <Container className="pt-5">
+          <div
+            className="inserimento_dati w-50 mx-auto border p-4 mt-5 shadow bg-light"
+            style={{ borderRadius: "20px" }}
           >
-            <Form.Group className="mb-3">
-              <Form.Label>Indirizzo email</Form.Label>
-              <Form.Control type="email" disabled placeholder={cliente.emailContatto} />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Oggetto</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Oggetto"
-                className="mb-3"
-                required
-                value={oggetto}
-                onChange={e => {
-                  setOggetto(e.target.value);
-                }}
-              />
-              <Form.Label>Contenuto</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={6}
-                placeholder="Contenuto"
-                className="mb-3"
-                value={contenuto}
-                required
-                onChange={e => {
-                  setContenuto(e.target.value);
-                }}
-              />
-              <div className="d-flex justify-content-between">
-                <Link to={"/utenti"} className="m-0">
-                  <Button variant="secondary">Indietro</Button>
-                </Link>
-                <Button type="submit">Invia</Button>
-              </div>
-            </Form.Group>
-          </Form>
+            <Form
+              onSubmit={(e) => {
+                e.preventDefault();
+                sendEmail();
+              }}
+            >
+              <Form.Group className="mb-3">
+                <Form.Label>Indirizzo email</Form.Label>
+                <Form.Control type="email" disabled placeholder={cliente.emailContatto} />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Oggetto</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Oggetto"
+                  className="mb-3 input"
+                  style={{ boxShadow: "none" }}
+                  required
+                  value={oggetto}
+                  onChange={(e) => {
+                    setOggetto(e.target.value);
+                  }}
+                />
+                <Form.Label>Contenuto</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={6}
+                  placeholder="Contenuto"
+                  className="mb-3 input"
+                  style={{ boxShadow: "none" }}
+                  value={contenuto}
+                  required
+                  onChange={(e) => {
+                    setContenuto(e.target.value);
+                  }}
+                />
+                <div className="d-flex justify-content-between">
+                  <Link to={"/utenti"} className="m-0">
+                    <Button variant="outline-secondary">Indietro</Button>
+                  </Link>
+                  <Button type="submit" style={{ width: "100px" }} variant="outline-primary">
+                    Invia
+                  </Button>
+                </div>
+              </Form.Group>
+            </Form>
+          </div>
         </Container>
       )}
     </>
