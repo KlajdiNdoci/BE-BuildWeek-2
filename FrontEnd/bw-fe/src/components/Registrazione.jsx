@@ -92,7 +92,7 @@ const Registrazione = () => {
                   <Form.Control
                     required
                     value={email}
-                    type="text"
+                    type="email"
                     placeholder="email"
                     onChange={(e) => {
                       setEmail(e.target.value);
