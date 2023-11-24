@@ -47,7 +47,7 @@ const Fatture = () => {
         <Row>
           <Col xs={3}>
             <div className="inserimento_dati mx-auto border p-4 mt-3 shadow bg-light" style={{ borderRadius: "20px" }}>
-              <ul className="mt-5">
+              <ul className="">
                 <span style={{ fontSize: "25px", fontFamily: "italic" }}>Mostra fatture:</span>
                 <li
                   style={{ cursor: "pointer" }}
