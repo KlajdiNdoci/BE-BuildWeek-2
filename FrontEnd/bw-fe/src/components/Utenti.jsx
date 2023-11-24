@@ -119,7 +119,7 @@ const Utenti = () => {
       <Container fluid className="pt-5">
         <Row>
           <Col xs={3}>
-            <div className="inserimento_dati mx-auto border p-4 mt-5 shadow bg-light" style={{ borderRadius: "20px" }}>
+            <div className="inserimento_dati mx-auto border p-4 mt-3 shadow bg-light" style={{ borderRadius: "20px" }}>
               <ul className="">
                 <span style={{ fontSize: "25px", fontFamily: "italic" }}> Mostra clienti:</span>
                 <li
@@ -259,7 +259,7 @@ const Utenti = () => {
           <Col xs={9} className="d-flex flex-column justify-content-start align-items-center">
             {listaUtenti && (
               <>
-                <ListGroup className=" w-100 text-center shadow mb-3">
+                <ListGroup className=" w-100 text-center shadow mb-3 mt-3">
                   <ListGroup.Item className="bg-light">
                     <Row className="d-flex justify-content-between align-items-center">
                       <Col xs={2} className="text-start">
