@@ -2,9 +2,10 @@ package EPIC.ENERGY.SERVICE.BEBuildWeek2;
 
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.controllers.ClienteController;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.entities.Cliente;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.payloads.ClientePayload;
 import EPIC_ENERGY_SERVICE.BEBuildWeek2.services.ClienteService;
+import EPIC_ENERGY_SERVICE.BEBuildWeek2.utils.TipoCliente;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentMatchers;
@@ -21,12 +22,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 
 @WebMvcTest(controllers = ClienteController.class)
@@ -43,11 +44,6 @@ public class TestCliente {
     @Autowired
     private ObjectMapper objectMapper;
 
-
-    @BeforeEach
-    public void init() {
-
-    }
 
     //----------------------Test delete------------------
     @Test
@@ -89,6 +85,19 @@ public class TestCliente {
         given(clienteService.findByFatturatoAnnuale(ArgumentMatchers.anyInt(), ArgumentMatchers.anyInt(), ArgumentMatchers.anyString(), ArgumentMatchers.anyDouble())).willReturn(clientePage);
         ResultActions resp = mockMvc.perform(get("/clienti/filter?fatturatoAnnuale=10").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(clientePage)));
         resp.andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    //----------------Test createCliente-----------------------
+    @Test
+    public void createCliente() throws Exception {
+        ClientePayload clientePayload = new ClientePayload("pippo", "ragione sociale", "qqqqqqqqqqq", "akmks@gmail.com", 11111, "akmkma@gmail.com", "11111111", "aa@gmail.com", "pluto", "aa", "111111", TipoCliente.SRL, "1", "1", LocalDate.of(2023, 11, 12));
+
+        Cliente c = new Cliente();
+        given(clienteService.save(ArgumentMatchers.any())).willReturn(new Cliente());
+
+        ResultActions resp = mockMvc.perform(post("/clienti").contentType(MediaType.APPLICATION_JSON).content(objectMapper.writeValueAsString(clientePayload)));
+
+        resp.andExpect(MockMvcResultMatchers.status().isCreated());
     }
 
 }
