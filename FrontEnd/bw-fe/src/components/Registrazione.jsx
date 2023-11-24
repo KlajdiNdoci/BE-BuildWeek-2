@@ -32,7 +32,7 @@ const Registrazione = () => {
   };
   return (
     <>
-      <Container fluid="">
+      <Container fluid="sm">
         <Form onSubmit={login}>
           <Form.Group className="mt-3">
             <Form.Label>Username</Form.Label>
