@@ -116,138 +116,150 @@ const Utenti = () => {
 
   return (
     <>
-      <Container fluid>
+      <Container fluid className="pt-5">
         <Row>
           <Col xs={3}>
-            <ul className="mt-5">
-              Mostra clienti:
-              <li
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  setPagina(1);
-                  setOrdine("nomeCliente");
-                  setNomeFunzione("getUtenti");
-                  getUtenti("nomeCliente", 1);
-                }}
-              >
-                Nome
-              </li>
-              <li
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  setPagina(1);
-                  setOrdine("fatturatoAnnuale");
-                  setNomeFunzione("getUtenti");
-                  getUtenti("fatturatoAnnuale", 1);
-                }}
-              >
-                Fatturato
-              </li>
-              <li
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  setPagina(1);
-                  setOrdine("dataInserimento");
-                  setNomeFunzione("getUtenti");
-                  getUtenti("dataInserimento", 1);
-                }}
-              >
-                Data di inserimento
-              </li>
-              <li
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  setPagina(1);
-                  setOrdine("dataUltimoContatto");
-                  setNomeFunzione("getUtenti");
-                  getUtenti("dataUltimoContatto", 1);
-                }}
-              >
-                Data di ultimo contatto
-              </li>
-              <li
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  setPagina(1);
-                  setNomeFunzione("getByprovincia");
-                  getByprovincia(1);
-                }}
-              >
-                Provincia sede legale
-              </li>
-              <li
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  setSearch("");
-                  setPagina(1);
-                  setNomeFunzione("findAllByProvincia");
-                  handleShow();
-                }}
-              >
-                Cerca provincia
-              </li>
-              <li
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  setSearch("");
-                  setPagina(1);
-                  setFilter("fatturatoAnnuale");
-                  setNomeFiltro("Fatturato annuale");
-                  setNomePH("Scrivi un numero");
-                  setNomeFunzione("filterClienti");
-                  handleShowFilter();
-                }}
-              >
-                Filtra per fatturato annuale
-              </li>
-              <li
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  setSearch("");
-                  setPagina(1);
-                  setFilter("dataInserimento");
-                  setNomeFiltro("Data di inserimento");
-                  setNomePH("yyyy-MM-dd");
-                  setNomeFunzione("filterClienti");
-                  handleShowFilter();
-                }}
-              >
-                Filtra per data di inserimento
-              </li>
-              <li
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  setSearch("");
-                  setPagina(1);
-                  setFilter("dataUltimoContatto");
-                  setNomeFiltro("Data di ultimo contatto");
-                  setNomePH("yyyy-MM-dd");
-                  setNomeFunzione("filterClienti");
-                  handleShowFilter();
-                }}
-              >
-                Filtra per data di ultimo contatto
-              </li>
-              <li
-                style={{ cursor: "pointer" }}
-                onClick={() => {
-                  setSearch("");
-                  setPagina(1);
-                  setFilter("nome");
-                  setNomeFiltro("Parte del nome");
-                  setNomePH("Scrivi un nome o solo una parte");
-                  setNomeFunzione("filterClienti");
-                  handleShowFilter();
-                }}
-              >
-                Filtra per parte del nome
-              </li>
-            </ul>
+            <div className="inserimento_dati mx-auto border p-4 mt-5 shadow bg-light" style={{ borderRadius: "20px" }}>
+              <ul className="">
+                <span style={{ fontSize: "25px", fontFamily: "italic" }}> Mostra clienti:</span>
+                <li
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setPagina(1);
+                    setOrdine("nomeCliente");
+                    setNomeFunzione("getUtenti");
+                    getUtenti("nomeCliente", 1);
+                  }}
+                  className="mt-3"
+                >
+                  Nome
+                </li>
+                <li
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setPagina(1);
+                    setOrdine("fatturatoAnnuale");
+                    setNomeFunzione("getUtenti");
+                    getUtenti("fatturatoAnnuale", 1);
+                  }}
+                  className="mt-1"
+                >
+                  Fatturato
+                </li>
+                <li
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setPagina(1);
+                    setOrdine("dataInserimento");
+                    setNomeFunzione("getUtenti");
+                    getUtenti("dataInserimento", 1);
+                  }}
+                  className="mt-1"
+                >
+                  Data di inserimento
+                </li>
+                <li
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setPagina(1);
+                    setOrdine("dataUltimoContatto");
+                    setNomeFunzione("getUtenti");
+                    getUtenti("dataUltimoContatto", 1);
+                  }}
+                  className="mt-1"
+                >
+                  Data di ultimo contatto
+                </li>
+                <li
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setPagina(1);
+                    setNomeFunzione("getByprovincia");
+                    getByprovincia(1);
+                  }}
+                  className="mt-1"
+                >
+                  Provincia sede legale
+                </li>
+                <li
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setSearch("");
+                    setPagina(1);
+                    setNomeFunzione("findAllByProvincia");
+                    handleShow();
+                  }}
+                  className="mt-1"
+                >
+                  Cerca provincia
+                </li>
+                <li
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setSearch("");
+                    setPagina(1);
+                    setFilter("fatturatoAnnuale");
+                    setNomeFiltro("Fatturato annuale");
+                    setNomePH("Scrivi un numero");
+                    setNomeFunzione("filterClienti");
+                    handleShowFilter();
+                  }}
+                  className="mt-1"
+                >
+                  Filtra per fatturato annuale
+                </li>
+                <li
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setSearch("");
+                    setPagina(1);
+                    setFilter("dataInserimento");
+                    setNomeFiltro("Data di inserimento");
+                    setNomePH("yyyy-MM-dd");
+                    setNomeFunzione("filterClienti");
+                    handleShowFilter();
+                  }}
+                  className="mt-1"
+                >
+                  Filtra per data di inserimento
+                </li>
+                <li
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setSearch("");
+                    setPagina(1);
+                    setFilter("dataUltimoContatto");
+                    setNomeFiltro("Data di ultimo contatto");
+                    setNomePH("yyyy-MM-dd");
+                    setNomeFunzione("filterClienti");
+                    handleShowFilter();
+                  }}
+                  className="mt-1"
+                >
+                  Filtra per data di ultimo contatto
+                </li>
+                <li
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setSearch("");
+                    setPagina(1);
+                    setFilter("nome");
+                    setNomeFiltro("Parte del nome");
+                    setNomePH("Scrivi un nome o solo una parte");
+                    setNomeFunzione("filterClienti");
+                    handleShowFilter();
+                  }}
+                  className="mt-1"
+                >
+                  Filtra per parte del nome
+                </li>
+              </ul>
+            </div>
           </Col>
-          <Col xs={9} className="d-flex flex-column justify-content-center align-items-center">
+          <Col xs={9} className="d-flex flex-column justify-content-start align-items-center">
             {listaUtenti && (
               <>
-                <ListGroup className="mt-5 w-100 text-center">
+                <ListGroup className=" w-100 text-center shadow mb-3">
                   <ListGroup.Item className="bg-light">
                     <Row className="d-flex justify-content-between align-items-center">
                       <Col xs={2} className="text-start">
