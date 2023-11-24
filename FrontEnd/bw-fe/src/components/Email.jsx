@@ -80,49 +80,58 @@ const Email = () => {
     <>
       {statoMail && <Alert variant="success">Email inviata correttamente. Sarai reindirizzato in {cont}</Alert>}
       {cliente && (
-        <Container className="mt-5">
-          <Form
-            onSubmit={(e) => {
-              e.preventDefault();
-              sendEmail();
-            }}
+        <Container className="pt-5">
+          <div
+            className="inserimento_dati w-50 mx-auto border p-4 mt-5 shadow bg-light"
+            style={{ borderRadius: "20px" }}
           >
-            <Form.Group className="mb-3">
-              <Form.Label>Indirizzo email</Form.Label>
-              <Form.Control type="email" disabled placeholder={cliente.emailContatto} />
-            </Form.Group>
-            <Form.Group className="mb-3">
-              <Form.Label>Oggetto</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Oggetto"
-                className="mb-3"
-                required
-                value={oggetto}
-                onChange={(e) => {
-                  setOggetto(e.target.value);
-                }}
-              />
-              <Form.Label>Contenuto</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={6}
-                placeholder="Contenuto"
-                className="mb-3"
-                value={contenuto}
-                required
-                onChange={(e) => {
-                  setContenuto(e.target.value);
-                }}
-              />
-              <div className="d-flex justify-content-between">
-                <Link to={"/utenti"} className="m-0">
-                  <Button variant="secondary">Indietro</Button>
-                </Link>
-                <Button type="submit">Invia</Button>
-              </div>
-            </Form.Group>
-          </Form>
+            <Form
+              onSubmit={(e) => {
+                e.preventDefault();
+                sendEmail();
+              }}
+            >
+              <Form.Group className="mb-3">
+                <Form.Label>Indirizzo email</Form.Label>
+                <Form.Control type="email" disabled placeholder={cliente.emailContatto} />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Oggetto</Form.Label>
+                <Form.Control
+                  type="text"
+                  placeholder="Oggetto"
+                  className="mb-3 input"
+                  style={{ boxShadow: "none" }}
+                  required
+                  value={oggetto}
+                  onChange={(e) => {
+                    setOggetto(e.target.value);
+                  }}
+                />
+                <Form.Label>Contenuto</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={6}
+                  placeholder="Contenuto"
+                  className="mb-3 input"
+                  style={{ boxShadow: "none" }}
+                  value={contenuto}
+                  required
+                  onChange={(e) => {
+                    setContenuto(e.target.value);
+                  }}
+                />
+                <div className="d-flex justify-content-between">
+                  <Link to={"/utenti"} className="m-0">
+                    <Button variant="outline-secondary">Indietro</Button>
+                  </Link>
+                  <Button type="submit" style={{ width: "100px" }} variant="outline-primary">
+                    Invia
+                  </Button>
+                </div>
+              </Form.Group>
+            </Form>
+          </div>
         </Container>
       )}
     </>

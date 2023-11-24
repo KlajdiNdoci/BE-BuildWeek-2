@@ -45,7 +45,7 @@ a.page-link {
   position: absolute;
   width: 100%;
   height: 100%;
-  display: flex;
+  right: 15px;
 }
 
 #reg:before {
@@ -69,7 +69,7 @@ a.page-link {
 #reg .clone > *,
 #reg .text > * {
   opacity: 1;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   transition: 0.2s;
   margin-left: 4px;
 }
@@ -109,11 +109,24 @@ a.page-link {
 #reg svg {
   width: 20px;
   right: 0;
-  top: 50%;
+  top: 65%;
   transform: translateY(-50%) rotate(-50deg);
   transition: 0.2s ease-out;
 }
 
 #reg:hover svg {
   transform: translateY(-50%) rotate(-90deg);
+}
+
+.input:focus {
+  outline: none;
+  border: 1px solid #ccc;
+}
+
+.input {
+  caret-color: rgb(138, 138, 138);
+}
+
+li:hover {
+  transform: scale(1.05);
 }

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 const Registrazione = () => {
@@ -32,73 +32,104 @@ const Registrazione = () => {
   };
   return (
     <>
-      <Container fluid="sm">
-        <Form onSubmit={login}>
-          <Form.Group className="mt-3">
-            <Form.Label>Username</Form.Label>
-            <Form.Control
-              required
-              value={username}
-              type="text"
-              placeholder="username"
-              onChange={(e) => {
-                setUsername(e.target.value);
-              }}
-            />
-          </Form.Group>
-          <Form.Group className="mt-3">
-            <Form.Label>Nome</Form.Label>
-            <Form.Control
-              required
-              value={nome}
-              type="text"
-              placeholder="nome"
-              onChange={(e) => {
-                setNome(e.target.value);
-              }}
-            />
-          </Form.Group>
-          <Form.Group className="mt-3">
-            <Form.Label>Cognome</Form.Label>
-            <Form.Control
-              required
-              value={cognome}
-              type="text"
-              placeholder="cognome"
-              onChange={(e) => {
-                setCognome(e.target.value);
-              }}
-            />
-          </Form.Group>
-          <Form.Group className="mt-3">
-            <Form.Label>Email</Form.Label>
-            <Form.Control
-              required
-              value={email}
-              type="text"
-              placeholder="email"
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-          </Form.Group>
-          <Form.Group className="mt-3">
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              required
-              value={password}
-              type="password"
-              placeholder="password"
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-          </Form.Group>
+      <Container className="pt-5">
+        <div className="inserimento_dati w-50 mx-auto border p-4 mt-5 shadow bg-light" style={{ borderRadius: "20px" }}>
+          <div className="mb-5">
+            <h2>Registrazione</h2>
+          </div>
+          <Form onSubmit={login}>
+            <Form.Group className="mt-3">
+              <Form.Label>Username</Form.Label>
+              <Form.Control
+                required
+                value={username}
+                type="text"
+                placeholder="username"
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                }}
+                style={{ boxShadow: "none" }}
+                className="input"
+              />
+            </Form.Group>
 
-          <Button className="mt-3" type="submit">
-            Submit form
-          </Button>
-        </Form>
+            <Row xs={2}>
+              <Col>
+                <Form.Group className="mt-3">
+                  <Form.Label>Nome</Form.Label>
+                  <Form.Control
+                    required
+                    value={nome}
+                    type="text"
+                    placeholder="nome"
+                    onChange={(e) => {
+                      setNome(e.target.value);
+                    }}
+                    style={{ boxShadow: "none" }}
+                    className="input"
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mt-3">
+                  <Form.Label>Cognome</Form.Label>
+                  <Form.Control
+                    required
+                    value={cognome}
+                    type="text"
+                    placeholder="cognome"
+                    onChange={(e) => {
+                      setCognome(e.target.value);
+                    }}
+                    style={{ boxShadow: "none" }}
+                    className="input"
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mt-3">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    required
+                    value={email}
+                    type="text"
+                    placeholder="email"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
+                    style={{ boxShadow: "none" }}
+                    className="input"
+                  />
+                </Form.Group>
+              </Col>
+              <Col>
+                <Form.Group className="mt-3">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    required
+                    value={password}
+                    type="password"
+                    placeholder="password"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
+                    style={{ boxShadow: "none" }}
+                    className="input"
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+
+            <Button
+              className="mb-2 "
+              variant="outline-primary"
+              type="submit"
+              style={{ marginTop: "30px", width: "100px" }}
+            >
+              SignUp
+            </Button>
+          </Form>
+        </div>
       </Container>
     </>
   );
