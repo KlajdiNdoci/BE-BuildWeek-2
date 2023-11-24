@@ -9,7 +9,7 @@ const Registrazione = () => {
   const [nome, setNome] = useState();
   const [cognome, setCognome] = useState();
   const nav = useNavigate();
-  const login = async e => {
+  const login = async (e) => {
     e.preventDefault();
     try {
       const risp = await fetch(`http://localhost:3001/auth/register`, {
@@ -32,7 +32,7 @@ const Registrazione = () => {
   };
   return (
     <>
-      <Container fluid="sm">
+      <Container fluid="">
         <Form onSubmit={login}>
           <Form.Group className="mt-3">
             <Form.Label>Username</Form.Label>
@@ -41,7 +41,7 @@ const Registrazione = () => {
               value={username}
               type="text"
               placeholder="username"
-              onChange={e => {
+              onChange={(e) => {
                 setUsername(e.target.value);
               }}
             />
@@ -53,7 +53,7 @@ const Registrazione = () => {
               value={nome}
               type="text"
               placeholder="nome"
-              onChange={e => {
+              onChange={(e) => {
                 setNome(e.target.value);
               }}
             />
@@ -65,7 +65,7 @@ const Registrazione = () => {
               value={cognome}
               type="text"
               placeholder="cognome"
-              onChange={e => {
+              onChange={(e) => {
                 setCognome(e.target.value);
               }}
             />
@@ -77,7 +77,7 @@ const Registrazione = () => {
               value={email}
               type="text"
               placeholder="email"
-              onChange={e => {
+              onChange={(e) => {
                 setEmail(e.target.value);
               }}
             />
@@ -89,7 +89,7 @@ const Registrazione = () => {
               value={password}
               type="password"
               placeholder="password"
-              onChange={e => {
+              onChange={(e) => {
                 setPassword(e.target.value);
               }}
             />
